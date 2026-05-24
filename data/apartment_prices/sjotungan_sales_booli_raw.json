@@ -2,6 +2,51 @@
   "data": {
     "sold": [
       {
+        "id": "6065105",
+        "booliId": "6065105",
+        "url": "/bostad/677551",
+        "soldPrice": {
+          "formatted": "2 110 000 kr",
+          "raw": 2110000,
+          "__typename": "FormattedValue"
+        },
+        "soldSqmPrice": {
+          "raw": 25576,
+          "formatted": "25 600 kr/m²",
+          "__typename": "FormattedValue"
+        },
+        "objectType": "Lägenhet",
+        "livingArea": {
+          "formatted": "82,5 m²",
+          "__typename": "FormattedValue"
+        },
+        "rooms": {
+          "formatted": "3 rum",
+          "raw": 3,
+          "__typename": "FormattedValue"
+        },
+        "soldDate": "2026-05-23",
+        "agency": {
+          "id": "16",
+          "name": "HusmanHagberg",
+          "__typename": "Agency"
+        },
+        "latitude": 59.2431092,
+        "longitude": 18.2328416,
+        "location": {
+          "address": {
+            "streetAddress": "Myggdalsvägen 22",
+            "__typename": "Address"
+          },
+          "__typename": "Location"
+        },
+        "apartmentNumber": {
+          "formatted": "Lgh 1001",
+          "__typename": "FormattedValue"
+        },
+        "__typename": "SoldProperty"
+      },
+      {
         "id": "6082791",
         "booliId": "6082791",
         "url": "/bostad/678138",

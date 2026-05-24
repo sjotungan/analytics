@@ -1,6 +1,53 @@
 [
   {
     "__typename": "SaleCard",
+    "id": "1762143513543617235",
+    "listingId": "21476262",
+    "slug": "lagenhet-4rum-tyreso-centrum-tyreso-kommun-myggdalsvagen-52-1762143513543617235",
+    "streetAddress": "Myggdalsvägen 52",
+    "soldAt": "1779463800.0",
+    "soldAtLabel": "Såld 22 maj. 2026",
+    "askingPrice": "2 495 000 kr",
+    "finalPrice": "2 295 000 kr",
+    "image": {
+      "__typename": "CardImage",
+      "filename": "fa/7c/fa7c5972f9f7d1c747f2299103888528.jpg",
+      "lqipBase64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAMElEQVR4nGP4/+vv1Pba4pQoVQYGhrqmuvaiTFUxNlFpFYaOhtpXty9snteuLiMGAEeaD6YQfxl6AAAAAElFTkSuQmCC"
+    },
+    "livingArea": "94 m²",
+    "locationDescription": "Tyresö Centrum, Tyresö kommun",
+    "fee": "7 706 kr/mån",
+    "squareMeterPrice": "24 415 kr/m²",
+    "housingForm": {
+      "__typename": "HousingForm",
+      "symbol": "APARTMENT",
+      "name": "Lägenhet"
+    },
+    "rooms": "4 rum",
+    "landArea": null,
+    "priceChange": "-8 %",
+    "coordinates": {
+      "__typename": "GeometryPoint",
+      "lat": 59.242363,
+      "long": 18.23459
+    },
+    "brokerAgencyName": "HusmanHagberg Tyresö/Älta",
+    "brokerAgencyThumbnail": "https://bilder.hemnet.se/images/broker_logo_1_2x/9a/7d/9a7d81a753c38de8c339f134145f40eb.jpg",
+    "labels": [
+      {
+        "__typename": "Label",
+        "text": "Balkong",
+        "identifier": "BALCONY",
+        "category": "FEATURE"
+      }
+    ],
+    "product": "NONE",
+    "thumbnail({\"format\":\"ITEMGALLERY_CUT\"})": "https://bilder.hemnet.se/images/itemgallery_cut/fa/7c/fa7c5972f9f7d1c747f2299103888528.jpg",
+    "mapThumbnail({\"format\":\"ITEMGALLERY_CUT\"})": null,
+    "recordType": "COMMON"
+  },
+  {
+    "__typename": "SaleCard",
     "id": "9050946543561105935",
     "listingId": "21705647",
     "slug": "lagenhet-4rum-centrala-tyreso-tyreso-kommun-myggdalsvagen-64-9050946543561105935",

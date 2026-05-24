@@ -609,11 +609,11 @@
         <p class="source-ref">Interaktiv sparandeanalys för BRF Sjötungan: <a href="savings.html">savings.html</a></p>
 
         <h3>Jämförelse med andra föreningar</h3>
-        <p>Hur ligger Sjötungan till jämfört med andra bostadsrättsföreningar i Stockholmsområdet? Nedan jämförs sparandet med regionala genomsnitt från HSB:s Bostadsrättsbarometer (publicerad 2025, baserad på 2024 års data) samt tre närliggande föreningar. Sjötungan visas med sitt 2025-värde (306 kr/kvm) — peer-föreningarnas 2025-rapporter har ännu inte publicerats, så deras värden avser 2024. Jämförelsen uppdateras när 2025-rapporterna blir tillgängliga.</p>
+        <p>Hur ligger Sjötungan till jämfört med andra bostadsrättsföreningar i Stockholmsområdet? Nedan jämförs sparandet med regionala genomsnitt från HSB:s Bostadsrättsbarometer (publicerad 2025, baserad på 2024 års data) samt tre närliggande föreningar. <strong>Sjötungan och Gäddan visas med 2025-värden</strong> (båda har publicerat sina 2025-rapporter); <strong>Siken och Björkbacken visas med 2024-värden</strong> eftersom deras 2025-rapporter ännu inte är publicerade.</p>
 
         <!-- Chart 3: Comparison bar chart -->
         <div id="sparandeComparisonChart" style="width:100%; margin: 20px 0;"></div>
-        <p class="source-ref">Sjötungan = 2025, övriga = 2024. Källa: HSB Bostadsrättsbarometer 2025, årsredovisningar.</p>
+        <p class="source-ref">Sjötungan + Gäddan = 2025; Siken + Björkbacken = 2024. Källa: HSB Bostadsrättsbarometer 2025, årsredovisningar.</p>
 
         <h3>Sammanfattning: Sparande</h3>
         <div class="callout-blue">
@@ -758,11 +758,82 @@
         <p>Styrelsens viktigaste verktyg för att hålla skuldsättningen i schack är amortering (att successivt betala av lånen), smart upphandling med konkurrensutsatta anbud, och god räntehantering — det sistnämnda har föreningen hittills lyckats väl med, som vi noterade under Sparande.</p>
 
         <h3>Jämförelse med andra föreningar</h3>
-        <p>Sjötungan visas med sitt 2025-värde (4 462 kr/kvm). Grannföreningarnas 2025-rapporter har ännu inte publicerats, så deras värden avser 2024 — jämförelsen uppdateras när nya rapporter blir tillgängliga.</p>
+        <p><strong>Sjötungan och Gäddan visas med 2025-värden</strong> (4 462 respektive 2 449 kr/kvm); <strong>Siken och Björkbacken med 2024-värden</strong> eftersom deras 2025-rapporter ännu inte är publicerade.</p>
         <div id="skuldComparisonChart" style="width:100%; margin: 20px 0;"></div>
-        <p class="source-ref">Skuldsättning per kvm. Sjötungan = 2025, övriga = 2024. Källa: årsredovisningar, HSB Barometer 2025.</p>
+        <p class="source-ref">Skuldsättning per kvm. Sjötungan + Gäddan = 2025; Siken + Björkbacken = 2024. Källa: årsredovisningar, HSB Barometer 2025.</p>
 
-        <p>Alla fyra lokala föreningarna ligger inom "Normal"-intervallet. Sjötungan har något högre skuldsättning än Siken och Björkbacken, men klart lägre än Stockholmssnittet på 5 773 kr/kvm (HSB Barometer 2025). Det viktigaste är dock inte nivån i sig, utan hur den utvecklas i takt med stambytet.</p>
+        <p>Alla fyra lokala föreningarna ligger inom "Normal"-intervallet. Sjötungan har den högsta skuldsättningen (4 462 kr/kvm, 2025), tätt följt av Björkbacken (4 283, 2024), Siken (3 070, 2024) och Gäddan (2 449, 2025 — ned från 2 780 år 2024). Alla ligger klart under Stockholmssnittet på 5 773 kr/kvm (HSB Barometer 2025). Det viktigaste är dock inte nivån i sig, utan hur den utvecklas i takt med stambytet.</p>
+
+        <h3>Belåningsgrad — skuld i förhållande till fastighetens värde</h3>
+        <p>Skuldsättning per kvm är HSB:s standardmått, men det säger inget om hur stor skulden är i förhållande till vad fastigheten faktiskt är värd. Belåningsgrad (loan-to-value, LTV) kompletterar bilden: <strong>totala skulder / fastighetens värde</strong>. Det finns ingen självklar nämnare — vi visar två varianter sida vid sida:</p>
+        <ul>
+            <li><strong>Mot marknadsbaserat värde</strong> — årsmedian kr/m² från Booli × 51 666 kvm. Speglar verkliga marknaden men volatilt och slår igenom även vid tillfälliga prisdippar.</li>
+            <li><strong>Mot taxeringsvärde</strong> — stabilt och bokfört (Not 9), men Skatteverkets taxering uppdateras bara vart 3–6 år och ligger historiskt på ca 75% av marknadsvärdet.</li>
+        </ul>
+
+        <table class="riktvarde-table" style="margin-bottom:16px">
+            <thead><tr><th></th><th>2025</th><th>2024</th><th>2023</th><th>2022</th></tr></thead>
+            <tbody>
+                <tr><td>Totala skulder (MSEK)</td><td>230</td><td>234</td><td>228</td><td>221</td></tr>
+                <tr><td>Marknadsbaserat värde (MSEK)</td><td>1 209</td><td>1 466</td><td>1 457</td><td>1 818</td></tr>
+                <tr><td>Taxeringsvärde (MSEK)</td><td>733</td><td>740</td><td>740</td><td>590</td></tr>
+                <tr><td>LTV mot marknadsvärde</td><td>19%</td><td>16%</td><td>16%</td><td>12%</td></tr>
+                <tr><td>LTV mot taxeringsvärde</td><td>31%</td><td>32%</td><td>31%</td><td>37%</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout-blue">
+            <strong>2025: 19% mot marknadsvärde, 31% mot taxeringsvärde.</strong><br>
+            De två måtten ger olika berättelser. Mot marknadsvärde har belåningsgraden stigit från 12% (2022) till 19% (2025), eftersom kr/m² på Booli sjunkit ungefär 33% från toppen 2022. Mot taxeringsvärde har den däremot förbättrats från 37% (2022) till 31% (2025) — drivet av höjda taxeringar 2023, inte av amortering. Marknadsbaserad LTV ger en känsla för hur stor del av medlemmarnas eget värde som föreningens skulder utgör. För en bank som ska bevilja stambyteslån är dock taxeringsvärdet utgångspunkten.
+        </div>
+
+        <p class="source-ref">Skulder från årsredovisning (kortfristiga + långfristiga räntebärande). Marknadsbaserat värde = median kr/m² från Booli-försäljningar × 51 666 kvm. Taxeringsvärde från Not 9 Byggnader och mark (stamma2026.pdf, sid 13).</p>
+
+        <h3>Jämförelse med grannföreningarna — marknadsbaserad LTV</h3>
+        <p>Eftersom LTV mot marknadsvärde kan beräknas direkt som <em>skuld kr/m² ÷ försäljningsmedian kr/m²</em> krävs ingen totalyta för respektive förening — jämförelsen omfattar därför alla fyra föreningar. <strong>Sjötungan och Gäddan visas med 2025-värden</strong> (båda har publicerat sina 2025-rapporter); <strong>Siken och Björkbacken visas med 2024-värden</strong> eftersom deras 2025-rapporter ännu inte är ute.</p>
+
+        <table class="riktvarde-table" style="margin-bottom:16px">
+            <thead><tr><th>Förening</th><th>Skuld kr/m²</th><th>Median kr/m²</th><th>LTV (marknad)</th></tr></thead>
+            <tbody>
+                <tr><td>BRF Gäddan (2025)</td><td>2 449</td><td>32 594</td><td>8%</td></tr>
+                <tr><td>BRF Siken (2024)</td><td>3 070</td><td>38 890</td><td>8%</td></tr>
+                <tr><td>BRF Björkbacken (2024)</td><td>4 283</td><td>29 787</td><td>14%</td></tr>
+                <tr><td><strong>BRF Sjötungan (2025)</strong></td><td><strong>4 462</strong></td><td><strong>23 404</strong></td><td><strong>19%</strong></td></tr>
+            </tbody>
+        </table>
+
+        <div id="ltvMarknadComparisonChart" style="width:100%; margin: 20px 0;"></div>
+        <p class="source-ref">LTV mot marknadsvärde, %. Sjötungan + Gäddan = 2025; Siken + Björkbacken = 2024. Streckad linje = SCB:s genomsnitt för BRF äldre än 40 år (15%, 2023-data); källa: <a href="https://www.scb.se/hitta-statistik/temaomraden/sveriges-ekonomi/fordjupningsartiklar_Sveriges_ekonomi/bostadsrattsforeningar-kan-fa-fortsatt-stigande-rantekostnader/" target="_blank" rel="noopener">SCB fördjupningsartikel jan 2024</a>. Skuld kr/m² ur respektive årsredovisning, försäljningsmedian från Booli.</p>
+
+        <div class="callout-blue">
+            <strong>Sjötungan 19% — högst i jämförelsen. Björkbacken 14%, Siken 8%, Gäddan 8%.</strong><br>
+            Sjötungan har högst marknadsbaserad LTV — drivet både av högst skuld per kvm (4 462 mot Gäddans 2 449) och lägst försäljningsmedian (23 404 mot Sikens 38 890). Spridningen visar att det inte är ett "Tyresö-fenomen": grannarna har klart lägre LTV idag. Som jämförelse ligger SCB:s genomsnitt för BRF äldre än 40 år på 15% (2023) — Sjötungans 19% är alltså något över riksgenomsnittet för jämförbara föreningar, medan Gäddan, Siken och Björkbacken ligger under. Stambytet är huvudförklaringen till skillnaden.
+        </div>
+
+        <h3>Jämförelse med grannföreningarna — LTV mot taxeringsvärde</h3>
+        <p>För LTV mot taxeringsvärde behövs respektive förenings totala skuld och totala taxeringsvärde. Vi har data för alla fyra föreningar. <strong>Sjötungan och Gäddan visas med 2025-värden; Siken och Björkbacken med 2024-värden</strong> (deras 2025-rapporter ännu inte publicerade).</p>
+
+        <table class="riktvarde-table" style="margin-bottom:16px">
+            <thead><tr><th>Förening</th><th>Totala skulder (MSEK)</th><th>Taxeringsvärde (MSEK)</th><th>LTV (tax)</th></tr></thead>
+            <tbody>
+                <tr><td>BRF Gäddan (2025)</td><td>83</td><td>756</td><td>11%</td></tr>
+                <tr><td>BRF Siken (2024/2025)</td><td>53</td><td>251</td><td>21%</td></tr>
+                <tr><td>BRF Björkbacken (2024)</td><td>154</td><td>515</td><td>30%</td></tr>
+                <tr><td><strong>BRF Sjötungan (2025)</strong></td><td><strong>230</strong></td><td><strong>733</strong></td><td><strong>31%</strong></td></tr>
+            </tbody>
+        </table>
+
+        <div id="ltvTaxComparisonChart" style="width:100%; margin: 20px 0;"></div>
+        <p class="source-ref">LTV mot taxeringsvärde, %. Sjötungan + Gäddan = 2025; Siken + Björkbacken = 2024. Källa: respektive årsredovisning. (HSB definierar inga LTV-tröskelvärden — staplarna visas utan referensband.)</p>
+
+        <div class="callout-blue">
+            <strong>Sjötungan 31% och Björkbacken 30% ligger nära varandra; Siken 21% och Gäddan 11% klart lägre.</strong><br>
+            LTV mot taxeringsvärde ger en annan ordning än marknadsbaserad LTV — Björkbacken hamnar nu nära Sjötungan, eftersom Björkbacken har relativt höga lån men lägre marknadsvärde än de andra grannarna. Gäddan ligger lägst med endast 11% — drivet av låg total skuld (83 MSEK) i förhållande till ett högt taxeringsvärde (756 MSEK). Skillnaden mellan måtten illustrerar varför man inte bör luta sig mot ett enda nyckeltal. För bankerna är taxeringsvärdesbasen utgångspunkten.
+        </div>
+
+        <p class="source-ref">Gäddan: skuld 82,7 MSEK (långfristiga 54,9 + kortfristiga 27,8 till kreditinstitut, Balansräkning sid 9, gaddan_arsredovisning_2025.pdf) ≈ 83 MSEK; taxeringsvärde 756,3 MSEK (förvaltningsberättelsen sid 2). Siken: skuld 3 070 kr/kvm × totalyta 17 263 kvm (sid 1) = 53 MSEK; taxeringsvärde 251,4 MSEK (Not 9, sid 14, publik-arsredovisning-siken.pdf, räkenskapsår 2024-05-01—2025-04-30). Björkbacken: skuld 4 283 kr/kvm × totalyta 35 946 kvm (sid 5+7) = 154 MSEK; taxeringsvärde 514,7 MSEK (Not 7, sid 17, HSB Brf Bjorkbacken... 2024). Sjötungan: se ovan.</p>
+
+        <p class="source-ref">Skuld kr/m² från respektive årsredovisning. Försäljningsmedian per år från Booli (<a href="data/apartment_prices/sjotungan_sales_booli.csv">sjotungan</a>, <a href="data/apartment_prices/bjorkbacken_annual_medians_booli.csv">björkbacken</a>, <a href="data/apartment_prices/gaddan_annual_medians_booli.csv">gäddan</a>, <a href="data/apartment_prices/siken_annual_medians_booli.csv">siken</a>). Sjötungan + Gäddan = 2025-värden; Siken + Björkbacken = 2024 eftersom deras 2025-rapporter ännu inte publicerats.</p>
 
         <h3>Sammanfattning: Skuldsättning</h3>
         <div class="callout-blue">
@@ -830,11 +901,11 @@
         <p>Styrelsen kan i viss mån påverka energikostnaderna genom energieffektivisering — t.ex. injustering av värmesystem, byte till LED-belysning (genomfört 2021) och optimering av ventilation (nytt styrsystem 2020–2021). Men de största kostnadsökningarna beror på höjda taxor som ligger utanför föreningens kontroll.</p>
 
         <h3>Jämförelse med andra föreningar</h3>
-        <p>Sjötungan visas med sitt 2025-värde (304 kr/kvm). Grannföreningarnas 2025-rapporter har ännu inte publicerats, så deras värden avser 2024 — jämförelsen uppdateras när nya rapporter blir tillgängliga.</p>
+        <p><strong>Sjötungan och Gäddan visas med 2025-värden</strong> (304 respektive 248 kr/kvm); <strong>Siken och Björkbacken med 2024-värden</strong> eftersom deras 2025-rapporter ännu inte är publicerade.</p>
         <div id="energiComparisonChart" style="width:100%; margin: 20px 0;"></div>
-        <p class="source-ref">Energikostnad per kvm. Sjötungan = 2025, övriga = 2024. Källa: årsredovisningar.</p>
+        <p class="source-ref">Energikostnad per kvm. Sjötungan + Gäddan = 2025; Siken + Björkbacken = 2024. Källa: årsredovisningar.</p>
 
-        <p>Sjötungan ligger nu väl in i "Hög"-intervallet (304 kr/kvm, 2025) — en uppgång på 41 kr/kvm sedan 2024. Grannföreningarnas 2024-värden låg i spannet "Normal" till precis över gränsen för "Hög": Siken och Gäddan strax under 250 kr/kvm, Björkbacken precis över. Eftersom samma externa kostnadsdrivare (fjärrvärme, VA, el) drabbat hela regionen är det troligt att även grannarnas värden stigit under 2025 — men i vilken takt vet vi inte förrän rapporterna släpps.</p>
+        <p>Sjötungan ligger nu väl in i "Hög"-intervallet (304 kr/kvm, 2025) — en uppgång på 41 kr/kvm sedan 2024. Gäddans 2025-värde (248 kr/kvm) ligger fortfarande inom "Normal", men har stigit från 235 (2024) — samma typ av rörelse som Sjötungan, fast från en lägre nivå. Siken och Björkbacken har vi bara 2024-värden för (229 respektive 269 kr/kvm); eftersom samma externa kostnadsdrivare (fjärrvärme, VA, el) drabbat hela regionen är det troligt att även deras 2025-värden stigit, men i vilken takt vet vi inte förrän rapporterna släpps.</p>
 
         <h3>Sammanfattning: Energikostnad</h3>
         <p>BRF Sjötungans energikostnad på 304 kr/kvm (2025) ligger mitt i intervallet "Hög" enligt HSB:s skala och närmar sig "Mycket hög" (&gt; 350 kr/kvm). Kostnaden har ökat med 41 kr/kvm på ett enda år (+15,6%), främst drivet av höjda taxor på fjärrvärme och VA. Föreningen har genomfört viss energieffektivisering (LED, ventilation) men de största kostnadsdrivarna ligger utanför styrelsens kontroll. Det kommande stambytet med IMD (individuell mätning och debitering av varmvatten) kan på sikt bidra till mer medveten vattenförbrukning.</p>
@@ -889,11 +960,11 @@
         <p><strong>Stambytet kommer att öka räntekänsligheten.</strong> När föreningen tar nya lån för stambytet ökar de räntebärande skulderna, medan årsavgifterna inte nödvändigtvis ökar i samma takt. Det innebär att räntekänsligheten kan stiga till kanske 7–9%, beroende på hur mycket som lånas och hur avgifterna justeras.</p>
 
         <h3>Jämförelse med andra föreningar</h3>
-        <p>Sjötungans räntekänslighet är oförändrad mellan 2024 och 2025 (5%). Grannföreningarnas 2025-rapporter har ännu inte publicerats, så deras värden avser 2024 — jämförelsen uppdateras när nya rapporter blir tillgängliga.</p>
+        <p>Sjötungans räntekänslighet är oförändrad mellan 2024 och 2025 (5%). <strong>Gäddan visas med sitt 2025-värde</strong> (3%, ned från 4% år 2024); <strong>Siken och Björkbacken med 2024-värden</strong> eftersom deras 2025-rapporter ännu inte är publicerade.</p>
         <div id="rantekanslighetComparisonChart" style="width:100%; margin: 20px 0;"></div>
-        <p class="source-ref">Räntekänslighet. Sjötungan = 2025 (oförändrat sedan 2024), övriga = 2024. Källa: årsredovisningar.</p>
+        <p class="source-ref">Räntekänslighet. Sjötungan = 2025 (oförändrat sedan 2024); Gäddan = 2025; Siken + Björkbacken = 2024. Källa: årsredovisningar.</p>
 
-        <p>Alla fyra lokala föreningarna har låg räntekänslighet — Gäddan och Siken på 4%, Sjötungan och Björkbacken på 5%. Stockholmssnittet var 8% under 2021 (HSB Bostadsrättsbarometer 2022; nyare barometrar redovisar inte detta nyckeltal separat). Tyresö-föreningarna ligger klart bättre till än genomsnittet. Den avgörande frågan framåt är hur mycket varje förening behöver låna till kommande stambyte.</p>
+        <p>Alla fyra lokala föreningarna har låg räntekänslighet — Gäddan 3% (2025, ned från 4% år 2024), Siken 4% (2024), Sjötungan och Björkbacken 5%. Stockholmssnittet var 8% under 2021 (HSB Bostadsrättsbarometer 2022; nyare barometrar redovisar inte detta nyckeltal separat). Tyresö-föreningarna ligger klart bättre till än genomsnittet. Den avgörande frågan framåt är hur mycket varje förening behöver låna till kommande stambyte.</p>
 
         <h3>Sammanfattning: Räntekänslighet</h3>
         <p>BRF Sjötungans räntekänslighet på 5% är oförändrad mellan 2024 och 2025 — ett stabilt utgångsläge på gränsen "Låg"/"Normal". Men nyckeltalet kommer sannolikt att stiga i takt med att föreningen tar nya lån för stambytet. Och den faktiska räntenivån har redan börjat öka påtagligt: räntekostnaden steg med 55% under 2025 när förmånliga lån löpte ut. Räntekänsligheten bör följas noga de kommande åren.</p>
@@ -982,11 +1053,11 @@
         <p>2025 års nivå reflekterar avgiftshöjningen på 10% från januari 2025. Med ytterligare 3% per år kopplat till stambytet kommer avgiften att fortsätta stiga de kommande åren och förväntas passera 1 000 kr/kvm redan under 2026.</p>
 
         <h3>Jämförelse med andra föreningar</h3>
-        <p>Sjötungan visas med sitt 2025-värde (998 kr/kvm). Grannföreningarnas 2025-rapporter har ännu inte publicerats, så deras värden avser 2024 — jämförelsen uppdateras när nya rapporter blir tillgängliga.</p>
+        <p><strong>Sjötungan och Gäddan visas med 2025-värden</strong> (998 respektive 888 kr/kvm); <strong>Siken och Björkbacken med 2024-värden</strong> eftersom deras 2025-rapporter ännu inte är publicerade.</p>
         <div id="arsavgiftComparisonChart" style="width:100%; height:340px;"></div>
-        <p class="source-ref" style="text-align:center; font-size:12px; color:#888; margin-top:4px;">Årsavgift per kvm. Sjötungan = 2025, övriga = 2024. Källa: årsredovisningar, HSB Barometer 2025.</p>
+        <p class="source-ref" style="text-align:center; font-size:12px; color:#888; margin-top:4px;">Årsavgift per kvm. Sjötungan + Gäddan = 2025; Siken + Björkbacken = 2024. Källa: årsredovisningar, HSB Barometer 2025.</p>
 
-        <p>Sjötungan har efter 10%-höjningen 2025 den högsta avgiften i jämförelsen — strax över Björkbacken (962 kr/kvm, 2024) och klart över Stockholmssnittet på 833 kr/kvm (HSB Barometer 2025). Siken har den lägsta avgiften — men också det lägsta sparandet (120 kr/kvm), vilket illustrerar att låg avgift inte alltid är positivt. Notera att grannarnas 2025-avgifter kan ha hunnit komma ikapp; jämförelsen är inte fullt ut samma år.</p>
+        <p>Sjötungan har efter 10%-höjningen 2025 den högsta avgiften i jämförelsen (998 kr/kvm) — strax över Björkbacken (962 kr/kvm, 2024) och klart över Stockholmssnittet på 833 kr/kvm (HSB Barometer 2025). Gäddan har också höjt sin avgift — från 815 (2024) till 888 (2025), en uppgång på 9%. Siken har den lägsta avgiften (734 kr/kvm, 2024) — men också det lägsta sparandet (120 kr/kvm), vilket illustrerar att låg avgift inte alltid är positivt. Notera att Sikens och Björkbackens 2025-avgifter kan ha hunnit komma ikapp; jämförelsen är inte fullt ut samma år.</p>
 
         <div class="callout" style="border-left: 4px solid var(--vm-blue); background: #f0f4ff; padding: 16px 20px; border-radius: 8px; margin: 20px 0;">
             <p style="margin:0 0 8px 0;"><strong>Sammanfattning: Årsavgift</strong></p>
@@ -1113,7 +1184,7 @@
 
         <h3>Jämförelseföreningar</h3>
         <ul>
-            <li>BRF Gäddan — <a href="https://www.hsb.se/contentassets/86f49356af2f42af8d7c574c0198ef68/arsredovisning-2024.pdf" target="_blank" rel="noopener">årsredovisning 2024</a></li>
+            <li>BRF Gäddan — <a href="https://www.hsb.se/contentassets/86f49356af2f42af8d7c574c0198ef68/arsredovisning-2025.pdf" target="_blank" rel="noopener">årsredovisning 2025</a></li>
             <li>BRF Siken — <a href="https://www.hsb.se/contentassets/01cbe2f140c64d928887343d2128ba70/publik-arsredovisning.pdf" target="_blank" rel="noopener">årsredovisning 2024</a></li>
             <li>BRF Björkbacken — <a href="https://brfbjorkbacken.se/download.php?id=314015&auth=bc77653666" target="_blank" rel="noopener">årsredovisning 2024</a></li>
         </ul>
@@ -1458,7 +1529,7 @@ function renderSparandeHistoryChart() {
         { name: 'BRF Siken', value: 120 },
         { name: 'Stockholm\nsnitt', value: 165 },
         { name: 'HSB\nSödertörn', value: 175 },
-        { name: 'BRF Gäddan', value: 227 },
+        { name: 'BRF Gäddan', value: 302 },
         { name: 'BRF\nBjörkbacken', value: 322 },
         { name: 'BRF\nSjötungan', value: 306 }
     ];
@@ -1902,7 +1973,7 @@ function renderSparandeHistoryChart() {
     // ── Skuldsättning comparison chart ──
     (function() {
         const skuldCompData = [
-            { name: 'BRF\nGäddan', value: 2780 },
+            { name: 'BRF\nGäddan', value: 2449 },
             { name: 'BRF Siken', value: 3070 },
             { name: 'BRF\nBjörkbacken', value: 4283 },
             { name: 'BRF\nSjötungan', value: 4462 },
@@ -1959,6 +2030,65 @@ function renderSparandeHistoryChart() {
             plot_bgcolor: 'rgba(0,0,0,0)', paper_bgcolor: 'rgba(0,0,0,0)'
         }, { responsive: true, displayModeBar: false });
     })();
+
+    // ── LTV comparison charts (mot marknadsvärde + mot taxeringsvärde) ──
+    // No reference bands — HSB defines no LTV thresholds, and bank LTV-tak for
+    // BRF-finansiering varierar mellan banker och saknar etablerad standardkälla.
+    // referenceLine (optional): { value, label, color } — e.g. SCB-snitt.
+    function renderLtvComparisonChart(containerId, data, referenceLine) {
+        const colors = data.map(d => d.name.includes('Sjötungan') ? '#1A9E9E' : '#e0a030');
+        const yMax = Math.max(...data.map(d => d.value), referenceLine ? referenceLine.value : 0) * 1.25;
+        const valAnnots = data.map((d, i) => ({
+            x: i, y: d.value, xref: 'x', yref: 'y',
+            text: '<b>' + d.value + '%</b>', showarrow: false,
+            font: { size: 12, color: '#1b3a5c' }, yanchor: 'bottom', yshift: 4
+        }));
+        const shapes = [];
+        const refAnnots = [];
+        if (referenceLine) {
+            shapes.push({
+                type: 'line', yref: 'y', y0: referenceLine.value, y1: referenceLine.value,
+                xref: 'paper', x0: 0, x1: 1,
+                line: { color: referenceLine.color, width: 1.2, dash: 'dash' }, layer: 'below'
+            });
+            refAnnots.push({
+                x: 0, xref: 'paper', xanchor: 'left', y: referenceLine.value, yref: 'y', yanchor: 'bottom',
+                text: referenceLine.label, showarrow: false,
+                font: { size: 10, color: referenceLine.color }, yshift: 2
+            });
+        }
+        Plotly.newPlot(containerId, [{
+            type: 'bar',
+            x: data.map(d => d.name),
+            y: data.map(d => d.value),
+            marker: { color: colors, line: { width: 0 } },
+            width: 0.6,
+            hovertemplate: '<b>%{x}</b><br>%{y}%<extra></extra>'
+        }], {
+            showlegend: false,
+            height: 320,
+            margin: { l: 50, r: 40, t: 20, b: 50 },
+            yaxis: { title: '%', range: [0, yMax], showgrid: true, gridcolor: '#eee', zeroline: false,
+                     tickfont: { color: '#666' } },
+            xaxis: { tickfont: { size: 11, color: '#1b3a5c' }, tickangle: 0 },
+            shapes: shapes,
+            annotations: [...valAnnots, ...refAnnots],
+            plot_bgcolor: 'rgba(0,0,0,0)', paper_bgcolor: 'rgba(0,0,0,0)'
+        }, { responsive: true, displayModeBar: false });
+    }
+
+    renderLtvComparisonChart('ltvMarknadComparisonChart', [
+        { name: 'BRF\nGäddan',      value: 8 },
+        { name: 'BRF Siken',        value: 8 },
+        { name: 'BRF\nBjörkbacken', value: 14 },
+        { name: 'BRF\nSjötungan',   value: 19 }
+    ], { value: 15, label: 'SCB-snitt BRF 40+ år (2023): 15%', color: '#7f1d1d' });
+    renderLtvComparisonChart('ltvTaxComparisonChart', [
+        { name: 'BRF\nGäddan',      value: 11 },
+        { name: 'BRF Siken',        value: 21 },
+        { name: 'BRF\nBjörkbacken', value: 30 },
+        { name: 'BRF\nSjötungan',   value: 31 }
+    ]);
 
     // ── Section 4: Energikostnad charts ──
     const ENERGY_CAT_IDS = [22, 23, 24]; // El, Uppvärmning, Vatten
@@ -2077,7 +2207,7 @@ function renderSparandeHistoryChart() {
     (function() {
         const energiCompData = [
             { name: 'BRF Siken', value: 229 },
-            { name: 'BRF\nGäddan', value: 235 },
+            { name: 'BRF\nGäddan', value: 248 },
             { name: 'BRF\nBjörkbacken', value: 269 },
             { name: 'BRF\nSjötungan', value: 304 }
         ];
@@ -2200,7 +2330,7 @@ function renderSparandeHistoryChart() {
     // Comparison chart (hardcoded peer data)
     (function() {
         const compNames = ['Gäddan 6', 'Siken', 'Björkbacken', 'Sjötungan', 'Sthlm snitt 2021'];
-        const compValues = [4, 4, 5, 5, 8];
+        const compValues = [3, 4, 5, 5, 8];
         const compColors = compNames.map((n, i) => n.includes('Sjötungan') ? '#1A9E9E' : (compValues[i] < 5 ? '#10b981' : compValues[i] <= 9 ? '#f59e0b' : '#ef4444'));
 
         const rkCompBands = [
@@ -2321,8 +2451,8 @@ function renderSparandeHistoryChart() {
 
     // Comparison chart (hardcoded peer data for 2024)
     (function() {
-        const compNames = ['BRF Siken', 'BRF Gäddan', 'Stockholm\nsnitt', 'BRF\nBjörkbacken', 'BRF\nSjötungan'];
-        const compValues = [734, 815, 833, 962, 998];
+        const compNames = ['BRF Siken', 'Stockholm\nsnitt', 'BRF Gäddan', 'BRF\nBjörkbacken', 'BRF\nSjötungan'];
+        const compValues = [734, 833, 888, 962, 998];
         const compColors = compNames.map((n, i) => n.includes('Sjötungan') ? '#1A9E9E' : (compValues[i] < 500 ? '#10b981' : compValues[i] <= 800 ? '#10b981' : compValues[i] <= 1000 ? '#f59e0b' : '#ef4444'));
 
         const avgCompBands = [

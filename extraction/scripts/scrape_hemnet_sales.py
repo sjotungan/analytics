@@ -332,7 +332,7 @@ ROOM_SHARDS = [
 
 
 def scrape_all(location_id: int, shard_by_rooms: bool = False,
-               use_playwright: bool = False) -> list:
+               use_playwright: bool = True) -> list:
     session = PlaywrightSession() if use_playwright else requests.Session()
     seen_ids: set = set()
     all_raw_cards: list = []
@@ -382,11 +382,13 @@ def parse_args():
                    help="Run six separate queries (rooms 1, 2, 3, 4, 5, 6+) and union/dedup. "
                         "Useful for broad locations where a single query would hit Hemnet's "
                         "2,500-result cap. Multiplies request count ~6x.")
-    p.add_argument("--use-playwright", action="store_true",
+    p.add_argument("--use-playwright", dest="use_playwright",
+                   action=argparse.BooleanOptionalAction, default=True,
                    help="Fetch via headless Chromium (Playwright + stealth) instead of requests. "
-                        "Required when Hemnet has Cloudflare's challenge mitigation enabled — "
-                        "plain HTTP returns 403 in that mode. ~10× slower per page; reuses one "
-                        "browser context so cf_clearance is solved once and reused.")
+                        "Default: on. Hemnet's Cloudflare challenge is essentially always active in "
+                        "practice and plain HTTP returns 403, so Playwright is the only reliable "
+                        "path. Pass --no-use-playwright to force the requests path (faster but "
+                        "fails the moment Cloudflare flips on).")
     p.add_argument("--source", action="append", default=None,
                    help="Multi-source spec 'LOCATION_ID:STREET_NAME:NUMBER_SET' (repeatable). "
                         "Use for BRFs that span multiple streets — e.g. BRF Björkbacken which "
