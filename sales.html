@@ -206,6 +206,8 @@
         #median-fee-container,
         #median-compare-container,
         #mean-compare-container,
+        #median-normalized-container,
+        #mean-normalized-container,
         #count-container,
         #month-count-container {
             width: 100%;
@@ -229,6 +231,8 @@
             #median-fee-container,
             #median-compare-container,
             #mean-compare-container,
+            #median-normalized-container,
+            #mean-normalized-container,
             #count-container,
             #month-count-container { height: 320px; }
         }
@@ -415,6 +419,16 @@
             </div>
             <div id="median-compare-container"></div>
 
+            <h2 class="text-blue-700 font-semibold text-2xl mt-10 mb-2">Median kr/m² – avvikelse från Tyresö kommun (%)</h2>
+            <p class="text-gray-600 mb-3">
+                Samma serier som ovan, men normaliserade mot Tyresö kommuns årsmedian.
+                Varje punkt visar <em>(BRF / Tyresö − 1) × 100 %</em>. Tyresö ligger per
+                definition på 0 %; positiva värden betyder dyrare än Tyresösnittet,
+                negativa billigare. Inflationsjustering är överflödig här eftersom
+                täljare och nämnare skalas av samma faktor.
+            </p>
+            <div id="median-normalized-container"></div>
+
             <h2 class="text-blue-700 font-semibold text-2xl mt-10 mb-2">Snitt kr/m² – jämförelse med närliggande områden</h2>
             <p class="text-gray-600 mb-3">
                 Samma jämförelse som ovan, men baserad på årssnitt i stället för median.
@@ -423,6 +437,14 @@
                 endast median och saknas därför här.
             </p>
             <div id="mean-compare-container"></div>
+
+            <h2 class="text-blue-700 font-semibold text-2xl mt-10 mb-2">Snitt kr/m² – avvikelse från Tyresö kommun (%)</h2>
+            <p class="text-gray-600 mb-3">
+                Motsvarande normalisering för årssnitt: procentuell avvikelse från
+                Tyresö kommuns årssnitt. Tyresö = 0 %, övriga BRF:er pendlar runt
+                linjen beroende på hur dyra de varit jämfört med kommunsnittet.
+            </p>
+            <div id="mean-normalized-container"></div>
 
             <details class="data-details">
                 <summary>Om datan: BRF Gäddan &amp; HSB BRF Siken (Booli)</summary>
@@ -1551,6 +1573,132 @@
         });
     }
 
+    /* ── Render normalized comparison (% deviation vs Tyresö) ─ */
+    // For each year, plots (BRF / Tyresö − 1) × 100. Tyresö itself is a
+    // flat 0% reference. Inflation adjustment cancels out in the ratio,
+    // so the raw nominal kr/m² values are used directly regardless of
+    // the inflation toggle. `valueKey` selects which Sjötungan field
+    // (median/avg) and which reference field (median/mean) to compare.
+    function renderNormalizedComparison(containerId, deals, opts) {
+        const { sjKey, refKey, label } = opts;
+        const slider = document.getElementById('start-slider');
+        const startYear = parseInt((sliderDates[parseInt(slider.value, 10)] || '0000').slice(0, 4), 10);
+        const cutoff = Math.max(2013, startYear || 0);
+
+        // Normalize year to string for map keys — yearlyMedians returns
+        // year as a number, the area-median loaders keep it as the raw
+        // CSV string, and Map uses strict equality.
+        const tyMap = new Map();
+        tyresoMedians.forEach(d => {
+            const v = d[refKey];
+            if (Number.isFinite(v) && parseInt(d.year, 10) >= cutoff) tyMap.set(String(d.year), v);
+        });
+
+        const normalize = (rows, getValue, getCount) => rows
+            .filter(d => parseInt(d.year, 10) >= cutoff)
+            .map(d => {
+                const yearStr = String(d.year);
+                const baseline = tyMap.get(yearStr);
+                const v = getValue(d);
+                if (!Number.isFinite(v) || !Number.isFinite(baseline) || baseline === 0) return null;
+                return {
+                    year: yearStr,
+                    dev: (v / baseline - 1) * 100,
+                    raw: v,
+                    baseline,
+                    n: getCount(d),
+                };
+            })
+            .filter(Boolean);
+
+        const sjRows = yearlyMedians(deals);
+        const sj = normalize(sjRows, d => d[sjKey], d => d.count);
+        const bb = normalize(bjorkbackenMedians, d => d[refKey], d => d.n);
+        const gad = normalize(gaddanMedians, d => d[refKey], d => d.n);
+        const sikb = normalize(sikenMedians, d => d[refKey], d => d.n);
+        // Tyresö reference line: flat 0% across the years it has data for.
+        const tyYears = [...tyMap.keys()].sort();
+
+        const hoverFor = name =>
+            `<b>%{customdata[0]}</b><br>${label}: %{customdata[2]:,.0f} kr/m²<br>` +
+            `Tyresö: %{customdata[3]:,.0f} kr/m²<br>` +
+            `Avvikelse: %{y:+.1f} %<br>Antal: %{customdata[1]}<extra>${name}</extra>`;
+
+        const traces = [
+            {
+                type: 'scatter', mode: 'lines+markers',
+                name: 'BRF Sjötungan',
+                x: sj.map(d => `${d.year}-07-01`),
+                y: sj.map(d => d.dev),
+                customdata: sj.map(d => [d.year, d.n, d.raw, d.baseline]),
+                hovertemplate: hoverFor('BRF Sjötungan'),
+                line: { color: '#dc2626', width: 2.5 },
+                marker: { size: 9, color: '#dc2626', symbol: 'diamond', line: { width: 1, color: 'white' } },
+            },
+            {
+                type: 'scatter', mode: 'lines+markers',
+                name: 'HSB BRF Björkbacken',
+                x: bb.map(d => `${d.year}-07-01`),
+                y: bb.map(d => d.dev),
+                customdata: bb.map(d => [d.year, d.n, d.raw, d.baseline]),
+                hovertemplate: hoverFor('HSB BRF Björkbacken'),
+                line: { color: '#10b981', width: 2.5 },
+                marker: { size: 8, color: '#10b981', symbol: 'triangle-up', line: { width: 1, color: 'white' } },
+            },
+            {
+                type: 'scatter', mode: 'lines+markers',
+                name: 'BRF Gäddan',
+                x: gad.map(d => `${d.year}-07-01`),
+                y: gad.map(d => d.dev),
+                customdata: gad.map(d => [d.year, d.n, d.raw, d.baseline]),
+                hovertemplate: hoverFor('BRF Gäddan'),
+                line: { color: '#db2777', width: 2.5 },
+                marker: { size: 8, color: '#db2777', symbol: 'star', line: { width: 1, color: 'white' } },
+            },
+            {
+                type: 'scatter', mode: 'lines+markers',
+                name: 'HSB BRF Siken',
+                x: sikb.map(d => `${d.year}-07-01`),
+                y: sikb.map(d => d.dev),
+                customdata: sikb.map(d => [d.year, d.n, d.raw, d.baseline]),
+                hovertemplate: hoverFor('HSB BRF Siken'),
+                line: { color: '#0891b2', width: 2.5 },
+                marker: { size: 8, color: '#0891b2', symbol: 'hexagram', line: { width: 1, color: 'white' } },
+            },
+            {
+                type: 'scatter', mode: 'lines',
+                name: 'Tyresö kommun (referens)',
+                x: tyYears.map(y => `${y}-07-01`),
+                y: tyYears.map(() => 0),
+                hovertemplate: '<b>%{x|%Y}</b><br>Tyresö-baslinje: 0 %<extra>Tyresö kommun</extra>',
+                line: { color: '#ea580c', width: 1.5, dash: 'dash' },
+            },
+        ];
+
+        const layout = {
+            margin: { l: 70, r: 20, t: 30, b: 60 },
+            xaxis: { title: 'År', type: 'date', gridcolor: '#e5e7eb' },
+            yaxis: {
+                title: `Avvikelse från Tyresö ${label.toLowerCase()} (%)`,
+                gridcolor: '#e5e7eb',
+                zeroline: true,
+                zerolinecolor: '#9ca3af',
+                zerolinewidth: 1,
+                ticksuffix: ' %',
+            },
+            plot_bgcolor: '#f7f9fd',
+            paper_bgcolor: '#f7f9fd',
+            font: { family: 'system-ui, sans-serif', color: '#2f3d52' },
+            legend: { orientation: 'h', y: -0.2 },
+            hovermode: 'x unified',
+        };
+        Plotly.newPlot(containerId, traces, layout, {
+            responsive: true,
+            displaylogo: false,
+            modeBarButtonsToRemove: ['select2d', 'lasso2d'],
+        });
+    }
+
     /* ── Render yearly count chart ───────────────────── */
     function renderCountChart(deals) {
         const slider = document.getElementById('start-slider');
@@ -1760,7 +1908,13 @@
         renderSeasonal(filtered);
         renderMedianCharts(filtered);
         renderMedianComparison(filtered);
+        renderNormalizedComparison('median-normalized-container', filtered, {
+            sjKey: 'median', refKey: 'median', label: 'Median',
+        });
         renderMeanComparison(filtered);
+        renderNormalizedComparison('mean-normalized-container', filtered, {
+            sjKey: 'avg', refKey: 'mean', label: 'Snitt',
+        });
         renderCountChart(filtered);
         renderMonthCountChart(filtered);
     }
