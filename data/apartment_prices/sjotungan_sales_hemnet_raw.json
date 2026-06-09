@@ -1,6 +1,59 @@
 [
   {
     "__typename": "SaleCard",
+    "id": "2644001679389300135",
+    "listingId": "21397779",
+    "slug": "lagenhet-3rum-tyreso-centrum-tyreso-kommun-myggdalsvagen-14-2644001679389300135",
+    "streetAddress": "Myggdalsvägen 14",
+    "soldAt": "1780500600.0",
+    "soldAtLabel": "Såld 3 jun. 2026",
+    "askingPrice": "2 750 000 kr",
+    "finalPrice": "2 600 000 kr",
+    "image": {
+      "__typename": "CardImage",
+      "filename": "c5/c5/c5c56592eba224f9ac10e3ebd8c6a863.jpg",
+      "lqipBase64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAMklEQVR4nAEnANj/AMjEu87HwO3p6P/9/gCrqKFbVlWXk5XExssAKCktDQILMywyFxkm3LoS4gguz88AAAAASUVORK5CYII="
+    },
+    "livingArea": "90 m²",
+    "locationDescription": "Tyresö Centrum, Tyresö kommun",
+    "fee": "7 781 kr/mån",
+    "squareMeterPrice": "28 889 kr/m²",
+    "housingForm": {
+      "__typename": "HousingForm",
+      "symbol": "APARTMENT",
+      "name": "Lägenhet"
+    },
+    "rooms": "3 rum",
+    "landArea": null,
+    "priceChange": "-5 %",
+    "coordinates": {
+      "__typename": "GeometryPoint",
+      "lat": 59.2433777,
+      "long": 18.2328777
+    },
+    "brokerAgencyName": "HusmanHagberg Tyresö/Älta",
+    "brokerAgencyThumbnail": "https://bilder.hemnet.se/images/broker_logo_1_2x/9a/7d/9a7d81a753c38de8c339f134145f40eb.jpg",
+    "labels": [
+      {
+        "__typename": "Label",
+        "text": "Balkong",
+        "identifier": "BALCONY",
+        "category": "FEATURE"
+      },
+      {
+        "__typename": "Label",
+        "text": "Hiss",
+        "identifier": "ELEVATOR",
+        "category": "FEATURE"
+      }
+    ],
+    "product": "NONE",
+    "thumbnail({\"format\":\"ITEMGALLERY_CUT\"})": "https://bilder.hemnet.se/images/itemgallery_cut/c5/c5/c5c56592eba224f9ac10e3ebd8c6a863.jpg",
+    "mapThumbnail({\"format\":\"ITEMGALLERY_CUT\"})": null,
+    "recordType": "COMMON"
+  },
+  {
+    "__typename": "SaleCard",
     "id": "1762143513543617235",
     "listingId": "21476262",
     "slug": "lagenhet-4rum-tyreso-centrum-tyreso-kommun-myggdalsvagen-52-1762143513543617235",
@@ -899,8 +952,8 @@
       }
     ],
     "product": "ENHANCED",
-    "thumbnail({\"format\":\"ITEMGALLERY_CUT\"})": "https://bilder.hemnet.se/images/itemgallery_cut/68/e2/68e25baa71333d4763d3a7fe28b95ef2.jpg",
-    "mapThumbnail({\"format\":\"ITEMGALLERY_CUT\"})": null,
+    "thumbnail({\"format\":\"ITEMGALLERY_CUT\"})": null,
+    "mapThumbnail({\"format\":\"ITEMGALLERY_CUT\"})": "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvR8lQbyQytYdggFUVGZekvRFX2fJGGZ0&language=sv&map_id=f2115f301367545e&markers=icon%3Ahttps%3A%2F%2Fwww.hemnet.se%2Fimages%2Flisting_icons%2Fmap_markers%2Fstatic_map_markers%2Fsale%2Fapartment.png%7Cscale%3A1%7C59.24257%2C18.23265&size=690x460&zoom=14&signature=5e-z-_Vjsv0J-gtCMIqWPD-SLEY",
     "recordType": "COMMON"
   },
   {
