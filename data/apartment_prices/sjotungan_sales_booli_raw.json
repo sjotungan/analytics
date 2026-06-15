@@ -658,6 +658,51 @@
         "__typename": "SoldProperty"
       },
       {
+        "id": "6006798",
+        "booliId": "6006798",
+        "url": "/bostad/677808",
+        "soldPrice": {
+          "formatted": "2 000 000 kr",
+          "raw": 2000000,
+          "__typename": "FormattedValue"
+        },
+        "soldSqmPrice": {
+          "raw": 21739,
+          "formatted": "21 700 kr/m²",
+          "__typename": "FormattedValue"
+        },
+        "objectType": "Lägenhet",
+        "livingArea": {
+          "formatted": "92 m²",
+          "__typename": "FormattedValue"
+        },
+        "rooms": {
+          "formatted": "3 rum",
+          "raw": 3,
+          "__typename": "FormattedValue"
+        },
+        "soldDate": "2026-02-12",
+        "agency": {
+          "id": "12",
+          "name": "Fastighetsbyrån",
+          "__typename": "Agency"
+        },
+        "latitude": 59.2431794,
+        "longitude": 18.2333729,
+        "location": {
+          "address": {
+            "streetAddress": "Myggdalsvägen 18",
+            "__typename": "Address"
+          },
+          "__typename": "Location"
+        },
+        "apartmentNumber": {
+          "formatted": "Lgh 1502",
+          "__typename": "FormattedValue"
+        },
+        "__typename": "SoldProperty"
+      },
+      {
         "id": "5975168",
         "booliId": "5975168",
         "url": "/annons/5975168",
