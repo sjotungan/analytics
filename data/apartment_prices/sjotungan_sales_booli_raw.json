@@ -2,6 +2,48 @@
   "data": {
     "sold": [
       {
+        "id": "6106557",
+        "booliId": "6106557",
+        "url": "/annons/6106557",
+        "soldPrice": {
+          "formatted": "1 630 000 kr",
+          "raw": 1630000,
+          "__typename": "FormattedValue"
+        },
+        "soldSqmPrice": {
+          "raw": 18111,
+          "formatted": "18 100 kr/m²",
+          "__typename": "FormattedValue"
+        },
+        "objectType": "Lägenhet",
+        "livingArea": {
+          "formatted": "90 m²",
+          "__typename": "FormattedValue"
+        },
+        "rooms": {
+          "formatted": "4 rum",
+          "raw": 4,
+          "__typename": "FormattedValue"
+        },
+        "soldDate": "2026-07-08",
+        "agency": {
+          "id": "34",
+          "name": "Svensk Fastighetsförmedling",
+          "__typename": "Agency"
+        },
+        "latitude": 59.24264945,
+        "longitude": 18.23453368,
+        "location": {
+          "address": {
+            "streetAddress": "Myggdalsvägen 48",
+            "__typename": "Address"
+          },
+          "__typename": "Location"
+        },
+        "apartmentNumber": null,
+        "__typename": "SoldProperty"
+      },
+      {
         "id": "5445479",
         "booliId": "5445479",
         "url": "/bostad/677775",
