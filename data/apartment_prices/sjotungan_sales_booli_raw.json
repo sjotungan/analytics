@@ -2,6 +2,51 @@
   "data": {
     "sold": [
       {
+        "id": "6015925",
+        "booliId": "6015925",
+        "url": "/bostad/677989",
+        "soldPrice": {
+          "formatted": "2 400 000 kr",
+          "raw": 2400000,
+          "__typename": "FormattedValue"
+        },
+        "soldSqmPrice": {
+          "raw": 26087,
+          "formatted": "26 100 kr/m²",
+          "__typename": "FormattedValue"
+        },
+        "objectType": "Lägenhet",
+        "livingArea": {
+          "formatted": "92 m²",
+          "__typename": "FormattedValue"
+        },
+        "rooms": {
+          "formatted": "4 rum",
+          "raw": 4,
+          "__typename": "FormattedValue"
+        },
+        "soldDate": "2026-07-15",
+        "agency": {
+          "id": "10",
+          "name": "Erik Olsson",
+          "__typename": "Agency"
+        },
+        "latitude": 59.24180966,
+        "longitude": 18.23671729,
+        "location": {
+          "address": {
+            "streetAddress": "Myggdalsvägen 92",
+            "__typename": "Address"
+          },
+          "__typename": "Location"
+        },
+        "apartmentNumber": {
+          "formatted": "Lgh 1602",
+          "__typename": "FormattedValue"
+        },
+        "__typename": "SoldProperty"
+      },
+      {
         "id": "6106557",
         "booliId": "6106557",
         "url": "/annons/6106557",
