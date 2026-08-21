@@ -1,6 +1,102 @@
 [
   {
     "__typename": "SaleCard",
+    "id": "3820261077386584866",
+    "listingId": "21698697",
+    "slug": "lagenhet-4rum-tyreso-centrum-tyreso-kommun-myggdalsvagen-30-3820261077386584866",
+    "streetAddress": "Myggdalsvägen 30",
+    "soldAt": "1787070600.0",
+    "soldAtLabel": "Såld 18 aug. 2026",
+    "askingPrice": "2 295 000 kr",
+    "finalPrice": "2 225 000 kr",
+    "image": {
+      "__typename": "CardImage",
+      "filename": "6b/f6/6bf659c5c2500f426d05a7a51e8ae211.jpg",
+      "lqipBase64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAMElEQVR4nGM4vKbl/+97J85eCKlawDC5tfDyqf0d7c36GkoM+RlxmTF+tqb6HIwMAK6zEYGRHIUoAAAAAElFTkSuQmCC"
+    },
+    "livingArea": "88,5 m²",
+    "locationDescription": "Tyresö Centrum, Tyresö kommun",
+    "fee": "7 442 kr/mån",
+    "squareMeterPrice": "25 141 kr/m²",
+    "housingForm": {
+      "__typename": "HousingForm",
+      "symbol": "APARTMENT",
+      "name": "Lägenhet"
+    },
+    "rooms": "4 rum",
+    "landArea": null,
+    "priceChange": "-3 %",
+    "coordinates": {
+      "__typename": "GeometryPoint",
+      "lat": 59.2426643,
+      "long": 18.2324066
+    },
+    "brokerAgencyName": "HusmanHagberg Tyresö/Älta",
+    "brokerAgencyThumbnail": "https://bilder.hemnet.se/images/broker_logo_1_2x/9a/7d/9a7d81a753c38de8c339f134145f40eb.jpg",
+    "labels": [
+      {
+        "__typename": "Label",
+        "text": "Balkong",
+        "identifier": "BALCONY",
+        "category": "FEATURE"
+      }
+    ],
+    "product": "NONE",
+    "thumbnail({\"format\":\"ITEMGALLERY_CUT\"})": "https://bilder.hemnet.se/images/itemgallery_cut/6b/f6/6bf659c5c2500f426d05a7a51e8ae211.jpg",
+    "mapThumbnail({\"format\":\"ITEMGALLERY_CUT\"})": null,
+    "recordType": "COMMON"
+  },
+  {
+    "__typename": "SaleCard",
+    "id": "3643914559061357694",
+    "listingId": "21763750",
+    "slug": "lagenhet-4rum-tyreso-tyreso-kommun-myggdalsvagen-90-3643914559061357694",
+    "streetAddress": "Myggdalsvägen 90",
+    "soldAt": "1786665600.0",
+    "soldAtLabel": "Såld 14 aug. 2026",
+    "askingPrice": "2 495 000 kr",
+    "finalPrice": "2 495 000 kr",
+    "image": null,
+    "livingArea": "92 m²",
+    "locationDescription": "Tyresö, Tyresö kommun",
+    "fee": "7 968 kr/mån",
+    "squareMeterPrice": "27 120 kr/m²",
+    "housingForm": {
+      "__typename": "HousingForm",
+      "symbol": "APARTMENT",
+      "name": "Lägenhet"
+    },
+    "rooms": "4 rum",
+    "landArea": null,
+    "priceChange": "±0 %",
+    "coordinates": {
+      "__typename": "GeometryPoint",
+      "lat": 59.24191,
+      "long": 18.23647
+    },
+    "brokerAgencyName": "Svensk Fastighetsförmedling Tyresö",
+    "brokerAgencyThumbnail": "https://bilder.hemnet.se/images/broker_logo_1_2x/2a/4a/2a4a03ea8f74b36983d2f6e61ae5207d.png",
+    "labels": [
+      {
+        "__typename": "Label",
+        "text": "Balkong",
+        "identifier": "BALCONY",
+        "category": "FEATURE"
+      },
+      {
+        "__typename": "Label",
+        "text": "Hiss",
+        "identifier": "ELEVATOR",
+        "category": "FEATURE"
+      }
+    ],
+    "product": "ENHANCED",
+    "thumbnail({\"format\":\"ITEMGALLERY_CUT\"})": null,
+    "mapThumbnail({\"format\":\"ITEMGALLERY_CUT\"})": "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvR8lQbyQytYdggFUVGZekvRFX2fJGGZ0&language=sv&map_id=f2115f301367545e&markers=icon%3Ahttps%3A%2F%2Fwww.hemnet.se%2Fimages%2Flisting_icons%2Fmap_markers%2Fstatic_map_markers%2Fsale%2Fapartment.png%7Cscale%3A1%7C59.24191%2C18.23647&size=690x460&zoom=14&signature=ylMEWjTZRpJKGkqFNI5E604NHyw",
+    "recordType": "COMMON"
+  },
+  {
+    "__typename": "SaleCard",
     "id": "6899404595232686372",
     "listingId": "21676602",
     "slug": "lagenhet-4rum-centrala-tyreso-tyreso-kommun-myggdalsvagen-92-6899404595232686372",
@@ -660,8 +756,8 @@
       }
     ],
     "product": "ENHANCED",
-    "thumbnail({\"format\":\"ITEMGALLERY_CUT\"})": "https://bilder.hemnet.se/images/itemgallery_cut/d3/41/d34123e5cb6c7d020f06f482b186beff.jpg",
-    "mapThumbnail({\"format\":\"ITEMGALLERY_CUT\"})": null,
+    "thumbnail({\"format\":\"ITEMGALLERY_CUT\"})": null,
+    "mapThumbnail({\"format\":\"ITEMGALLERY_CUT\"})": "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvR8lQbyQytYdggFUVGZekvRFX2fJGGZ0&language=sv&map_id=f2115f301367545e&markers=icon%3Ahttps%3A%2F%2Fwww.hemnet.se%2Fimages%2Flisting_icons%2Fmap_markers%2Fstatic_map_markers%2Fsale%2Fapartment.png%7Cscale%3A1%7C59.24181%2C18.23671&size=690x460&zoom=14&signature=8rNGJ6-3Q-tIQAmmvMcCRIfnE3o",
     "recordType": "COMMON"
   },
   {

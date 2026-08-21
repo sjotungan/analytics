@@ -2,6 +2,93 @@
   "data": {
     "sold": [
       {
+        "id": "5875646",
+        "booliId": "5875646",
+        "url": "/bostad/677587",
+        "soldPrice": {
+          "formatted": "2 225 000 kr",
+          "raw": 2225000,
+          "__typename": "FormattedValue"
+        },
+        "soldSqmPrice": {
+          "raw": 25141,
+          "formatted": "25 100 kr/m²",
+          "__typename": "FormattedValue"
+        },
+        "objectType": "Lägenhet",
+        "livingArea": {
+          "formatted": "88,5 m²",
+          "__typename": "FormattedValue"
+        },
+        "rooms": {
+          "formatted": "4 rum",
+          "raw": 4,
+          "__typename": "FormattedValue"
+        },
+        "soldDate": "2026-08-18",
+        "agency": {
+          "id": "16",
+          "name": "HusmanHagberg",
+          "__typename": "Agency"
+        },
+        "latitude": 59.24266336,
+        "longitude": 18.23240722,
+        "location": {
+          "address": {
+            "streetAddress": "Myggdalsvägen 30",
+            "__typename": "Address"
+          },
+          "__typename": "Location"
+        },
+        "apartmentNumber": {
+          "formatted": "Lgh 1302",
+          "__typename": "FormattedValue"
+        },
+        "__typename": "SoldProperty"
+      },
+      {
+        "id": "6139953",
+        "booliId": "6139953",
+        "url": "/annons/6139953",
+        "soldPrice": {
+          "formatted": "2 495 000 kr",
+          "raw": 2495000,
+          "__typename": "FormattedValue"
+        },
+        "soldSqmPrice": {
+          "raw": 27120,
+          "formatted": "27 100 kr/m²",
+          "__typename": "FormattedValue"
+        },
+        "objectType": "Lägenhet",
+        "livingArea": {
+          "formatted": "92 m²",
+          "__typename": "FormattedValue"
+        },
+        "rooms": {
+          "formatted": "4 rum",
+          "raw": 4,
+          "__typename": "FormattedValue"
+        },
+        "soldDate": "2026-08-14",
+        "agency": {
+          "id": "34",
+          "name": "Svensk Fastighetsförmedling",
+          "__typename": "Agency"
+        },
+        "latitude": 59.24190947,
+        "longitude": 18.23646829,
+        "location": {
+          "address": {
+            "streetAddress": "Myggdalsvägen 90",
+            "__typename": "Address"
+          },
+          "__typename": "Location"
+        },
+        "apartmentNumber": null,
+        "__typename": "SoldProperty"
+      },
+      {
         "id": "6015925",
         "booliId": "6015925",
         "url": "/bostad/677989",
@@ -388,8 +475,8 @@
           "name": "Erik Olsson",
           "__typename": "Agency"
         },
-        "latitude": 59.24132428,
-        "longitude": 18.23537469,
+        "latitude": 59.24131584,
+        "longitude": 18.23527546,
         "location": {
           "address": {
             "streetAddress": "Myggdalsvägen 122",
@@ -6449,8 +6536,8 @@
           "name": "SkandiaMäklarna",
           "__typename": "Agency"
         },
-        "latitude": 59.24132428,
-        "longitude": 18.23537469,
+        "latitude": 59.24131584,
+        "longitude": 18.23527546,
         "location": {
           "address": {
             "streetAddress": "Myggdalsvägen 122",
@@ -10256,8 +10343,8 @@
           "name": "SkandiaMäklarna",
           "__typename": "Agency"
         },
-        "latitude": 59.24132428,
-        "longitude": 18.23537469,
+        "latitude": 59.24131584,
+        "longitude": 18.23527546,
         "location": {
           "address": {
             "streetAddress": "Myggdalsvägen 122",
@@ -11768,8 +11855,8 @@
           "name": "SkandiaMäklarna",
           "__typename": "Agency"
         },
-        "latitude": 59.24132428,
-        "longitude": 18.23537469,
+        "latitude": 59.24131584,
+        "longitude": 18.23527546,
         "location": {
           "address": {
             "streetAddress": "Myggdalsvägen 122",
