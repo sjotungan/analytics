@@ -397,6 +397,30 @@
                 Klicka på en punkt för att öppna Booli-annonsen.
             </p>
 
+            <h2 class="text-blue-700 font-semibold text-2xl mt-10 mb-2">Snitt och median kr/m² per månad</h2>
+            <p class="text-gray-600 mb-3">
+                Månadssnitt och månadsmedian av kr/m², summerat över alla år. Samma
+                siffror som linjerna i grafen ovan, men utan punktmolnet så att
+                nivåerna går att läsa av. Notera att skillnaderna mellan månader
+                här mest speglar <em>när</em> affärerna gjordes, inte vilken månad
+                de föll i – priserna har ungefär fördubblats under perioden, så en
+                månad med många affärer från de dyra åren ser dyr ut. Nästa graf
+                rensar bort det.
+            </p>
+            <div id="month-price-container"></div>
+
+            <h2 class="text-blue-700 font-semibold text-2xl mt-10 mb-2">Månadseffekt efter borttagen pristrend</h2>
+            <p class="text-gray-600 mb-3">
+                Avvikelse från den allmänna nivån när den underliggande pristrenden
+                (glidande trend med brytpunkter var 18:e månad) och boytan räknats
+                bort. Felstaplarna visar 95 % konfidensintervall för snittet;
+                medianen skattas med kvantilregression. Samtliga intervall korsar
+                noll – ingen enskild månad avviker statistiskt säkerställt, och
+                juli vilar på så få affärer att utslaget där inte går att lita på.
+            </p>
+            <div id="month-effect-container"></div>
+
+
 
             <p class="text-gray-600 mb-3">Median av kr/m² per försäljningsår överlagrad på föreningens totala lån per m².</p>
             <div id="median-loan-container"></div>
@@ -569,6 +593,16 @@
                 volymen är ca tio gånger större.
             </p>
             <div id="count-container"></div>
+
+            <h2 class="text-blue-700 font-semibold text-2xl mt-10 mb-2">Antal försäljningar per rullande år</h2>
+            <p class="text-gray-600 mb-3">
+                Samma affärer, men räknade i tolvmånadersfönster bakåt från dagens
+                datum: senaste året, året dessförinnan och så vidare. Till skillnad
+                från kalenderåren ovan är det senaste fönstret alltid komplett, så
+                det går att jämföra rakt av med tidigare år. Det första fönstret
+                utelämnas om det bara delvis täcks av data.
+            </p>
+            <div id="rolling-count-container"></div>
 
             <h2 class="text-blue-700 font-semibold text-2xl mt-10 mb-2">Antal försäljningar per månad</h2>
             <p class="text-gray-600 mb-3">
@@ -1808,6 +1842,319 @@
         });
     }
 
+
+    /* ── Gauss-Jordan: solves A b = rhs and returns A^-1 alongside ── */
+    function gaussJordan(A, rhs) {
+        const p = A.length;
+        const M = A.map((row, i) => {
+            const eye = new Array(p).fill(0);
+            eye[i] = 1;
+            return row.concat(eye, [rhs[i]]);
+        });
+        const W = 2 * p + 1;
+        for (let c = 0; c < p; c++) {
+            let piv = c;
+            for (let r = c + 1; r < p; r++) {
+                if (Math.abs(M[r][c]) > Math.abs(M[piv][c])) piv = r;
+            }
+            if (Math.abs(M[piv][c]) < 1e-11) return null;
+            const tmp = M[c]; M[c] = M[piv]; M[piv] = tmp;
+            const d = M[c][c];
+            for (let j = c; j < W; j++) M[c][j] /= d;
+            for (let r = 0; r < p; r++) {
+                if (r === c) continue;
+                const f = M[r][c];
+                if (!f) continue;
+                for (let j = c; j < W; j++) M[r][j] -= f * M[c][j];
+            }
+        }
+        return {
+            beta: M.map(r => r[W - 1]),
+            inv: M.map(r => r.slice(p, 2 * p)),
+        };
+    }
+
+    /* Weighted normal equations; w = null gives ordinary least squares. */
+    function fitWLS(X, y, w) {
+        const n = X.length, p = X[0].length;
+        const A = [], rhs = new Array(p).fill(0);
+        for (let i = 0; i < p; i++) A.push(new Array(p).fill(0));
+        for (let k = 0; k < n; k++) {
+            const row = X[k], wk = w ? w[k] : 1;
+            for (let i = 0; i < p; i++) {
+                rhs[i] += wk * row[i] * y[k];
+                for (let j = i; j < p; j++) A[i][j] += wk * row[i] * row[j];
+            }
+        }
+        for (let i = 0; i < p; i++) {
+            for (let j = 0; j < i; j++) A[i][j] = A[j][i];
+            A[i][i] += 1e-9;
+        }
+        return gaussJordan(A, rhs);
+    }
+
+    /* ── Month effects on log kr/m², net of a piecewise-linear price trend ──
+       Columns: intercept, t, hinges every 1.5 y, log(area), 11 sum-to-zero
+       month dummies. Effect for December is minus the sum of the other 11.  */
+    function monthEffects(deals) {
+        const rows = deals.filter(d =>
+            Number.isFinite(d.kr_per_m2) && d.kr_per_m2 > 0 &&
+            Number.isFinite(d.area) && d.area > 0 && d.date);
+        if (rows.length < 60) return null;
+        const months = new Set(rows.map(d => parseInt(d.date.slice(5, 7), 10)));
+        if (months.size < 12) return null;
+
+        // Anchor the spline at 1 January of the earliest year, so knot placement
+        // is deterministic rather than drifting with the first deal's date.
+        const firstYear = Math.min(...rows.map(d => parseInt(d.date.slice(0, 4), 10)));
+        const t0 = Date.parse(firstYear + '-01-01');
+        const YEAR_MS = 365.25 * 24 * 3600 * 1000;
+        const ts = rows.map(d => (Date.parse(d.date) - t0) / YEAR_MS);
+        const tmax = Math.max(...ts);
+        const knots = [];
+        for (let k = 1.5; k < tmax; k += 1.5) knots.push(k);
+
+        const X = [], y = [];
+        rows.forEach((d, i) => {
+            const col = [1, ts[i]];
+            knots.forEach(k => col.push(Math.max(ts[i] - k, 0)));
+            col.push(Math.log(d.area));
+            const m = parseInt(d.date.slice(5, 7), 10);
+            for (let mm = 1; mm <= 11; mm++) col.push((m === mm ? 1 : 0) - (m === 12 ? 1 : 0));
+            X.push(col);
+            y.push(Math.log(adjAmount(d.kr_per_m2, dealYear(d))));
+        });
+        const p = X[0].length, k0 = p - 11, n = X.length;
+        if (n <= p + 5) return null;
+
+        const ols = fitWLS(X, y, null);
+        if (!ols) return null;
+        let sse = 0;
+        const resid = y.map((yi, i) => {
+            let f = 0;
+            for (let j = 0; j < p; j++) f += X[i][j] * ols.beta[j];
+            const r = yi - f; sse += r * r; return r;
+        });
+        const s2 = sse / (n - p);
+
+        const mean = [], se = [];
+        let sumEff = 0, varDec = 0;
+        for (let i = 0; i < 11; i++) {
+            mean.push(ols.beta[k0 + i]);
+            sumEff += ols.beta[k0 + i];
+            se.push(Math.sqrt(Math.max(ols.inv[k0 + i][k0 + i] * s2, 0)));
+            for (let j = 0; j < 11; j++) varDec += ols.inv[k0 + i][k0 + j] * s2;
+        }
+        mean.push(-sumEff);
+        se.push(Math.sqrt(Math.max(varDec, 0)));
+
+        /* Median: L1 regression by iteratively reweighted least squares. */
+        let bl = ols.beta.slice();
+        for (let it = 0; it < 30; it++) {
+            const w = X.map((row, i) => {
+                let f = 0;
+                for (let j = 0; j < p; j++) f += row[j] * bl[j];
+                return 1 / Math.max(Math.abs(y[i] - f), 1e-4);
+            });
+            const step = fitWLS(X, y, w);
+            if (!step) break;
+            bl = step.beta;
+        }
+        const median = [];
+        let sumMed = 0;
+        for (let i = 0; i < 11; i++) { median.push(bl[k0 + i]); sumMed += bl[k0 + i]; }
+        median.push(-sumMed);
+
+        const counts = new Array(12).fill(0);
+        rows.forEach(d => { counts[parseInt(d.date.slice(5, 7), 10) - 1] += 1; });
+        return { mean, se, median, counts, n, resid };
+    }
+
+    /* ── Average and median kr/m² per calendar month ── */
+    function renderMonthPriceChart(deals) {
+        const SV = ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'];
+        const months = monthlyMedians(deals);
+        const by = new Map(months.map(m => [m.month, m]));
+        const xs = [], avg = [], med = [], cnt = [];
+        for (let m = 1; m <= 12; m++) {
+            const r = by.get(m);
+            xs.push(SV[m - 1]);
+            avg.push(r ? r.avg : null);
+            med.push(r ? r.median : null);
+            cnt.push(r ? r.count : 0);
+        }
+        const traces = [
+            {
+                type: 'scatter', mode: 'lines+markers', name: 'Månadssnitt',
+                x: xs, y: avg, customdata: cnt,
+                hovertemplate: `Snitt kr/m²${krSuffix()}: %{y:,.0f}<br>Antal affärer: %{customdata}<extra></extra>`,
+                line: { color: '#2a78d6', width: 2.5 },
+                marker: { size: 9, color: '#2a78d6', line: { width: 2, color: '#f7f9fd' } },
+            },
+            {
+                type: 'scatter', mode: 'lines+markers', name: 'Månadsmedian',
+                x: xs, y: med, customdata: cnt,
+                hovertemplate: `Median kr/m²${krSuffix()}: %{y:,.0f}<br>Antal affärer: %{customdata}<extra></extra>`,
+                line: { color: '#dc2626', width: 2.5 },
+                marker: { size: 9, color: '#dc2626', symbol: 'diamond', line: { width: 2, color: '#f7f9fd' } },
+            },
+        ];
+        const layout = {
+            margin: { l: 70, r: 20, t: 20, b: 60 },
+            xaxis: { title: 'Månad (alla år sammanslagna)', gridcolor: '#e5e7eb' },
+            yaxis: {
+                title: `kr / m²${krSuffix()}`, gridcolor: '#e5e7eb',
+                tickformat: ',d', separatethousands: true,
+            },
+            legend: { orientation: 'h', y: -0.2 },
+            hovermode: 'x unified',
+            plot_bgcolor: '#f7f9fd', paper_bgcolor: '#f7f9fd',
+            font: { family: 'system-ui, sans-serif', color: '#2f3d52' },
+        };
+        Plotly.newPlot('month-price-container', traces, layout, {
+            responsive: true, displaylogo: false,
+            modeBarButtonsToRemove: ['select2d', 'lasso2d'],
+        });
+    }
+
+    /* ── Detrended month effect, average and median ── */
+    function renderMonthEffectChart(deals) {
+        const SV = ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'];
+        const el = document.getElementById('month-effect-container');
+        const fit = monthEffects(deals);
+        if (!fit) {
+            Plotly.purge(el);
+            el.innerHTML = '<p class="text-sm text-gray-500 italic py-6 text-center">' +
+                'För få affärer i urvalet för att skatta en månadseffekt – ' +
+                'vidga filtren ovan.</p>';
+            return;
+        }
+        el.innerHTML = '';
+        const idx = SV.map((_, i) => i + 1);
+        const traces = [
+            {
+                type: 'scatter', mode: 'markers', name: 'Snitt (minsta kvadrat)',
+                x: idx.map(i => i - 0.13),
+                y: fit.mean.map(v => 100 * v),
+                customdata: fit.counts,
+                error_y: {
+                    type: 'data', array: fit.se.map(s => 100 * 1.96 * s),
+                    visible: true, color: '#2a78d6', thickness: 2, width: 5,
+                },
+                hovertemplate: 'Snitteffekt: %{y:+.1f} %<br>Antal affärer: %{customdata}<extra></extra>',
+                marker: { size: 10, color: '#2a78d6', line: { width: 2, color: '#f7f9fd' } },
+            },
+            {
+                type: 'scatter', mode: 'markers', name: 'Median (kvantilregression)',
+                x: idx.map(i => i + 0.13),
+                y: fit.median.map(v => 100 * v),
+                customdata: fit.counts,
+                hovertemplate: 'Medianeffekt: %{y:+.1f} %<br>Antal affärer: %{customdata}<extra></extra>',
+                marker: { size: 10, color: '#dc2626', symbol: 'diamond', line: { width: 2, color: '#f7f9fd' } },
+            },
+        ];
+        const layout = {
+            margin: { l: 70, r: 20, t: 46, b: 60 },
+            xaxis: {
+                title: 'Månad', gridcolor: '#e5e7eb',
+                tickmode: 'array', tickvals: idx, ticktext: SV,
+                range: [0.4, 12.6],
+            },
+            yaxis: {
+                title: 'Avvikelse från årsnivån (%)', gridcolor: '#e5e7eb',
+                zeroline: true, zerolinecolor: '#94a3b8', zerolinewidth: 1.5,
+                ticksuffix: ' %',
+            },
+            legend: { orientation: 'h', y: -0.2 },
+            hovermode: 'closest',
+            plot_bgcolor: '#f7f9fd', paper_bgcolor: '#f7f9fd',
+            font: { family: 'system-ui, sans-serif', color: '#2f3d52' },
+            annotations: [{
+                xref: 'paper', x: 0, yref: 'paper', y: 1.04, text: `n = ${fit.n} affärer`,
+                showarrow: false, font: { size: 11, color: '#5e6b80' },
+                xanchor: 'left', yanchor: 'bottom',
+            }],
+        };
+        Plotly.newPlot(el, traces, layout, {
+            responsive: true, displaylogo: false,
+            modeBarButtonsToRemove: ['select2d', 'lasso2d'],
+        });
+    }
+
+    /* ── Sales counted in rolling 12-month windows back from today ── */
+    function renderRollingCountChart(deals) {
+        const el = document.getElementById('rolling-count-container');
+        if (!deals.length) { Plotly.purge(el); return; }
+        const dates = deals.map(d => d.date).sort();
+        const earliest = dates[0];
+        const today = new Date();
+        const pad = v => String(v).padStart(2, '0');
+        const iso = dt => `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}-${pad(dt.getDate())}`;
+        const shiftYears = (dt, k) => {
+            const c = new Date(dt.getTime());
+            c.setFullYear(c.getFullYear() - k);
+            return c;
+        };
+
+        const windows = [];
+        for (let k = 0; k < 30; k++) {
+            const hi = shiftYears(today, k);
+            const loDate = shiftYears(hi, 1);
+            loDate.setDate(loDate.getDate() + 1);
+            const lo = iso(loDate), hiS = iso(hi);
+            if (lo < earliest) break;          // drop the partly covered window
+            let n = 0;
+            deals.forEach(d => { if (d.date >= lo && d.date <= hiS) n += 1; });
+            windows.push({ lo, hi: hiS, n, label: `${lo.slice(2, 4)}/${hiS.slice(2, 4)}` });
+        }
+        windows.reverse();
+        if (!windows.length) { Plotly.purge(el); return; }
+
+        const avg = windows.reduce((a, w) => a + w.n, 0) / windows.length;
+        const traces = [{
+            type: 'bar',
+            name: 'Antal affärer',
+            x: windows.map(w => w.label),
+            y: windows.map(w => w.n),
+            customdata: windows.map(w => [w.lo, w.hi]),
+            hovertemplate: '<b>%{y} affärer</b><br>%{customdata[0]} – %{customdata[1]}<extra></extra>',
+            marker: { color: '#2a78d6' },
+            text: windows.map(w => String(w.n)),
+            textposition: 'outside',
+            textfont: { size: 11, color: '#2f3d52' },
+            cliponaxis: false,
+        }];
+        const layout = {
+            margin: { l: 60, r: 20, t: 30, b: 70 },
+            xaxis: {
+                title: 'Tolvmånadersfönster (slutar samma datum som idag)',
+                gridcolor: '#e5e7eb', tickangle: 0,
+            },
+            yaxis: {
+                title: 'Antal sålda lägenheter', gridcolor: '#e5e7eb',
+                rangemode: 'tozero', tickformat: 'd',
+            },
+            showlegend: false,
+            plot_bgcolor: '#f7f9fd', paper_bgcolor: '#f7f9fd',
+            font: { family: 'system-ui, sans-serif', color: '#2f3d52' },
+            shapes: [{
+                type: 'line', xref: 'paper', x0: 0, x1: 1,
+                yref: 'y', y0: avg, y1: avg,
+                line: { color: '#94a3b8', width: 1.5 },
+            }],
+            annotations: [{
+                xref: 'paper', x: 0.015, y: avg, yref: 'y',
+                text: `snitt ${avg.toFixed(0)}`, showarrow: false,
+                font: { size: 11, color: '#5e6b80' },
+                xanchor: 'left', yanchor: 'bottom',
+            }],
+        };
+        Plotly.newPlot(el, traces, layout, {
+            responsive: true, displaylogo: false,
+            modeBarButtonsToRemove: ['select2d', 'lasso2d'],
+        });
+    }
+
     /* ── Sales count per calendar month, all years pooled ── */
     function renderMonthCountChart(deals) {
         const SV_MONTHS = ['januari', 'februari', 'mars', 'april', 'maj', 'juni',
@@ -1906,6 +2253,8 @@
         renderStats(filtered);
         renderScatter(filtered);
         renderSeasonal(filtered);
+        renderMonthPriceChart(filtered);
+        renderMonthEffectChart(filtered);
         renderMedianCharts(filtered);
         renderMedianComparison(filtered);
         renderNormalizedComparison('median-normalized-container', filtered, {
@@ -1916,6 +2265,7 @@
             sjKey: 'avg', refKey: 'mean', label: 'Snitt',
         });
         renderCountChart(filtered);
+        renderRollingCountChart(filtered);
         renderMonthCountChart(filtered);
     }
 
