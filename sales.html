@@ -166,6 +166,63 @@
             text-decoration: underline;
         }
 
+        .coverage {
+            margin: 10px 2px 0 2px;
+        }
+        .coverage-bar {
+            display: flex;
+            height: 10px;
+            border-radius: 999px;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+        .coverage-seg { height: 100%; }
+        .coverage-seg.repeat { background: #2a78d6; }
+        .coverage-seg.single { background: #9dc0ea; margin-left: 2px; }
+        .coverage-text {
+            font-size: 12.5px;
+            color: var(--vm-muted);
+            line-height: 1.55;
+            margin-top: 7px;
+        }
+        .coverage-text b { color: var(--vm-text); }
+        .coverage-key {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-right: 14px;
+            font-size: 12px;
+            color: var(--vm-muted);
+        }
+        .coverage-key i {
+            width: 10px; height: 10px; border-radius: 3px; display: inline-block;
+        }
+
+        .repeat-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 6px;
+            font-size: 12.5px;
+        }
+        .repeat-table th,
+        .repeat-table td {
+            text-align: right;
+            padding: 5px 8px;
+            border-bottom: 1px solid var(--vm-border);
+            white-space: nowrap;
+        }
+        .repeat-table th:first-child,
+        .repeat-table td:first-child { text-align: left; }
+        .repeat-table thead th {
+            color: var(--vm-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.04em;
+        }
+        .repeat-table td.up { color: #1d5fae; font-weight: 600; }
+        .repeat-table td.down { color: #b91c1c; font-weight: 600; }
+
         .stats {
             display: flex;
             flex-wrap: wrap;
@@ -202,6 +259,15 @@
             padding: 8px;
         }
 
+        #repeat-sales-container {
+            width: 100%;
+            height: 560px;
+            background: #f7f9fd;
+            border: 1px solid var(--vm-border);
+            border-radius: 10px;
+            padding: 8px;
+        }
+
         #median-loan-container,
         #median-fee-container,
         #median-compare-container,
@@ -227,6 +293,7 @@
         @media (max-width: 640px) {
             #scatter-container,
             #seasonal-container { height: 460px; }
+            #repeat-sales-container { height: 420px; }
             #median-loan-container,
             #median-fee-container,
             #median-compare-container,
@@ -419,6 +486,40 @@
                 juli vilar på så få affärer att utslaget där inte går att lita på.
             </p>
             <div id="month-effect-container"></div>
+
+            <h2 class="text-blue-700 font-semibold text-2xl mt-10 mb-2">Lägenheter som sålts mer än en gång</h2>
+            <p class="text-gray-600 mb-3">
+                Varje linje är en enskild lägenhet som bytt ägare minst två gånger i
+                urvalet, med en punkt per affär. Lutningen visar hur brant priset steg
+                eller föll för just den lägenheten – samma bostad, samma läge, samma
+                planlösning, så jämförelsen är fri från den blandning av stora och små
+                lägenheter som drar i snittkurvorna. <span style="color:#2a78d6; font-weight:600;">Blå</span>
+                linjer slutade på eller över sin första affär, <span style="color:#dc2626; font-weight:600;">röda</span> under.
+                Grå prickar (valfritt) är affärer som står ensamma i urvalet och därför
+                saknar lutning. Filtren ovanför första grafen gäller även här – en
+                lägenhet visas bara om minst två av dess affärer finns kvar efter
+                filtreringen.
+            </p>
+            <div style="margin: 0 0 8px 2px; font-size: 13px; color: var(--vm-text);">
+                <label style="cursor: pointer;">
+                    <input type="checkbox" id="repeat-index" style="margin-right: 6px; accent-color: var(--vm-blue);">
+                    Indexera varje lägenhet till sin första affär (= 100)
+                </label>
+                <label style="cursor: pointer; margin-left: 18px;" id="repeat-singles-label">
+                    <input type="checkbox" id="repeat-singles" style="margin-right: 6px; accent-color: var(--vm-blue);">
+                    Visa även lägenheter med bara en affär (prickar)
+                </label>
+            </div>
+            <div id="repeat-sales-container"></div>
+            <p class="text-xs text-gray-500 mt-3 text-center">
+                Håll muspekaren över en punkt för att lyfta fram just den lägenhetens
+                linje – övriga tonas ned. Klicka på punkten för att öppna Booli-annonsen.
+            </p>
+            <div class="coverage" id="repeat-coverage"></div>
+            <details class="data-details" id="repeat-table-details">
+                <summary>Tabell: lägenheternas prisutveckling</summary>
+                <div class="data-details-body" id="repeat-table-body"></div>
+            </details>
 
 
 
@@ -761,6 +862,7 @@
     let inflationBaseYear = 2024;
 
     const TOTAL_KVM = 51666; // BRF Sjötungan's total living area
+    const TOTAL_APARTMENTS = 604; // rows in data/apartments.csv
 
     /* ── Inflation: load macro_sweden.json and build price index ─ */
     // Mirrors changing_over_time.html: priceIndex(base_year) = 100, then
@@ -850,8 +952,70 @@
                 fee: parseFloat(r.monthly_fee_kr) || null,
                 url: r.booli_url,
                 listing_id: (r.listing_id || '').trim(),
+                apartment_number: (r.apartment_number || '').trim(),
+                property_id: ((r.booli_url || '').match(/\/bostad\/(\d+)/) || [])[1] || '',
             };
         }).filter(Boolean).sort((a, b) => a.date.localeCompare(b.date));
+    }
+
+    /* ── Stable apartment identity across sales ─────── */
+    // Two independent identifiers tie repeat sales to the same unit:
+    //   • apartment_number ("Lgh 1302"), unique within an address
+    //   • the Booli property id from /bostad/{id} URLs
+    // Neither covers the whole file — apartment_number is present on ~43 % of
+    // rows, property ids on a partly overlapping ~44 % — but where both exist
+    // they never disagree, so we union them and use the component as the key.
+    // Rows carrying neither (plain /annons/ links) get a singleton id and can
+    // never form a pair; address + boyta + rum is NOT a usable fallback, since
+    // several different apartments in the same stairwell share those values.
+    function assignUnitIds(deals) {
+        const parent = new Map();
+        const find = x => {
+            if (!parent.has(x)) parent.set(x, x);
+            while (parent.get(x) !== x) { parent.set(x, parent.get(parent.get(x))); x = parent.get(x); }
+            return x;
+        };
+        const union = (a, b) => { const ra = find(a), rb = find(b); if (ra !== rb) parent.set(ra, rb); };
+        deals.forEach((d, i) => {
+            const node = `row:${i}`;
+            find(node);
+            if (d.apartment_number) union(node, `apt:${d.address}|${d.apartment_number}`);
+            if (d.property_id) union(node, `bid:${d.property_id}`);
+        });
+        deals.forEach((d, i) => { d.unitId = find(`row:${i}`); });
+    }
+
+    /* ── Group the filtered deals into repeat-sale units ── */
+    // Returns one entry per apartment with ≥ 2 sales left after filtering,
+    // sorted by total change so the table reads top-down.
+    function repeatSaleUnits(deals) {
+        const byUnit = new Map();
+        deals.forEach(d => {
+            if (!byUnit.has(d.unitId)) byUnit.set(d.unitId, []);
+            byUnit.get(d.unitId).push(d);
+        });
+        const units = [];
+        byUnit.forEach(sales => {
+            if (sales.length < 2) return;
+            sales.sort((a, b) => a.date.localeCompare(b.date));
+            const ppm = sales.map(d => adjAmount(d.kr_per_m2, dealYear(d)));
+            const first = ppm[0], last = ppm[ppm.length - 1];
+            if (!(first > 0)) return;
+            const firstDate = sales[0].date, lastDate = sales[sales.length - 1].date;
+            const years = (new Date(lastDate) - new Date(firstDate)) / (365.25 * 24 * 3600 * 1000);
+            const totalPct = 100 * (last / first - 1);
+            const annualPct = years > 0.08 ? 100 * (Math.pow(last / first, 1 / years) - 1) : null;
+            const apt = sales.find(d => d.apartment_number);
+            units.push({
+                sales, ppm, first, last, firstDate, lastDate, years, totalPct, annualPct,
+                address: sales[0].address,
+                area: sales[0].area,
+                rooms: sales[0].rooms,
+                label: apt ? `${sales[0].address}, ${apt.apartment_number}` : sales[0].address,
+                up: totalPct >= 0,
+            });
+        });
+        return units.sort((a, b) => b.totalPct - a.totalPct);
     }
 
     /* ── Resolve a Booli URL/id to a deal ───────────── */
@@ -2232,6 +2396,261 @@
         });
     }
 
+    /* ── Repeat sales: one line per apartment ───────── */
+    // Only apartments that changed hands at least twice inside the current
+    // selection. Colour is polarity, not identity: with ~30 lines on the plot
+    // no categorical palette can keep them apart, and the question the chart
+    // answers is "up or down, and how steeply" — blue = ended above its first
+    // sale, red = ended below. The apartment itself is named on hover and
+    // listed in the table below the chart.
+    const REPEAT_UP = '#2a78d6';
+    const REPEAT_DOWN = '#dc2626';
+
+    function renderRepeatSales(deals) {
+        const el = document.getElementById('repeat-sales-container');
+        const units = repeatSaleUnits(deals);
+        const tableBody = document.getElementById('repeat-table-body');
+        const details = document.getElementById('repeat-table-details');
+
+        if (units.length < 1) {
+            Plotly.purge(el);
+            el.innerHTML = '<p class="text-sm text-gray-500 italic py-6 text-center">' +
+                'Ingen lägenhet har sålts mer än en gång i det här urvalet – ' +
+                'vidga filtren ovan.</p>';
+            if (details) details.style.display = 'none';
+            const cov = document.getElementById('repeat-coverage');
+            if (cov) cov.innerHTML = '';
+            return;
+        }
+        el.innerHTML = '';
+        if (details) details.style.display = '';
+
+        const indexed = document.getElementById('repeat-index').checked;
+        // A single sale has no earlier sale to index against, so the dot layer
+        // is only meaningful on the absolute axis.
+        const singlesBox = document.getElementById('repeat-singles');
+        const singlesLabel = document.getElementById('repeat-singles-label');
+        singlesBox.disabled = indexed;
+        singlesLabel.style.opacity = indexed ? 0.45 : 1;
+        singlesLabel.title = indexed ? 'Enstaka affärer kan inte indexeras – de saknar en tidigare affär att utgå från.' : '';
+        const showSingles = singlesBox.checked && !indexed;
+        const suffix = krSuffix();
+        let seenUp = false, seenDown = false;
+
+        const traces = units.map(u => {
+            const ys = u.ppm.map(v => indexed ? 100 * v / u.first : v);
+            const color = u.up ? REPEAT_UP : REPEAT_DOWN;
+            const isHighlight = highlightDeal && u.sales.some(d => d === highlightDeal);
+            const group = u.up ? 'up' : 'down';
+            const showLegend = u.up ? !seenUp : !seenDown;
+            if (u.up) seenUp = true; else seenDown = true;
+            const customdata = u.sales.map((d, i) => [
+                u.label,
+                `${Math.round(d.area)} m², ${Math.round(d.rooms)} rum`,
+                fmtPrice(Math.round(adjAmount(d.price, dealYear(d)))),
+                i === 0 ? '—' : `${(100 * (u.ppm[i] / u.first - 1)).toFixed(1).replace('-', '−')} %`,
+            ]);
+            return {
+                type: 'scatter', mode: 'lines+markers',
+                name: u.up ? 'Uppgång' : 'Nedgång',
+                legendgroup: group, showlegend: showLegend,
+                x: u.sales.map(d => d.date),
+                y: ys,
+                customdata,
+                hovertemplate:
+                    '<b>%{customdata[0]}</b><br>%{customdata[1]}<br>' +
+                    `%{x}<br>${indexed ? 'Index' : 'kr/m²' + suffix}: %{y:,.0f}<br>` +
+                    `Pris${suffix}: %{customdata[2]} kr<br>` +
+                    'Sedan första affären: %{customdata[3]}<extra></extra>',
+                line: {
+                    color, width: isHighlight ? 4 : 2,
+                    shape: 'linear',
+                },
+                marker: {
+                    size: isHighlight ? 12 : 8, color,
+                    line: { width: 2, color: '#f7f9fd' },
+                },
+                opacity: isHighlight ? 1 : 0.8,
+            };
+        });
+
+        // Context layer: every sale that stands alone in the current selection.
+        // Recessive gray — the lines are the subject, these only show how thin
+        // the repeat-sale sample is against the full flow of sales.
+        const inUnits = new Set();
+        units.forEach(u => u.sales.forEach(d => inUnits.add(d)));
+        const singles = deals.filter(d => !inUnits.has(d));
+        if (showSingles && singles.length) {
+            traces.unshift({
+                type: 'scatter', mode: 'markers', name: 'Såld en gång i urvalet',
+                x: singles.map(d => d.date),
+                y: singles.map(d => adjAmount(d.kr_per_m2, dealYear(d))),
+                customdata: singles.map(d => [
+                    d.address + (d.apartment_number ? `, ${d.apartment_number}` : ''),
+                    `${Math.round(d.area)} m², ${Math.round(d.rooms)} rum`,
+                    fmtPrice(Math.round(adjAmount(d.price, dealYear(d)))),
+                ]),
+                hovertemplate:
+                    '<b>%{customdata[0]}</b><br>%{customdata[1]}<br>' +
+                    `%{x}<br>kr/m²${suffix}: %{y:,.0f}<br>Pris${suffix}: %{customdata[2]} kr<extra></extra>`,
+                marker: { size: 7, color: '#64748b', opacity: 0.45, line: { width: 1, color: '#f7f9fd' } },
+            });
+        }
+        const unitOffset = traces.length - units.length;
+
+        const annual = units.map(u => u.annualPct).filter(v => Number.isFinite(v)).sort((a, b) => a - b);
+        const medAnnual = annual.length ? annual[Math.floor(annual.length / 2)] : null;
+        const nSales = units.reduce((a, u) => a + u.sales.length, 0);
+        const nUp = units.filter(u => u.up).length;
+
+        const shapes = indexed ? [{
+            type: 'line', xref: 'paper', x0: 0, x1: 1, yref: 'y', y0: 100, y1: 100,
+            line: { color: '#94a3b8', width: 1.5, dash: 'dot' },
+        }] : [];
+
+        const layout = {
+            margin: { l: 70, r: 20, t: 46, b: 60 },
+            xaxis: { title: 'Försäljningsdatum', gridcolor: '#e5e7eb', type: 'date' },
+            yaxis: {
+                title: indexed ? 'Index (första affären = 100)' : `kr / m²${suffix}`,
+                gridcolor: '#e5e7eb', tickformat: ',d', separatethousands: true,
+            },
+            legend: { orientation: 'h', y: -0.16 },
+            hovermode: 'closest',
+            plot_bgcolor: '#f7f9fd', paper_bgcolor: '#f7f9fd',
+            font: { family: 'system-ui, sans-serif', color: '#2f3d52' },
+            shapes,
+            annotations: [{
+                xref: 'paper', x: 0, yref: 'paper', y: 1.04,
+                text: `${units.length} lägenheter · ${nSales} affärer · ${nUp} upp / ${units.length - nUp} ned` +
+                      (medAnnual === null ? '' : ` · median ${medAnnual >= 0 ? '+' : '−'}${Math.abs(medAnnual).toFixed(1)} %/år`),
+                showarrow: false, font: { size: 11, color: '#5e6b80' },
+                xanchor: 'left', yanchor: 'bottom',
+            }],
+        };
+
+        Plotly.newPlot(el, traces, layout, {
+            responsive: true, displaylogo: false,
+            modeBarButtonsToRemove: ['select2d', 'lasso2d'],
+        });
+
+        // Hover emphasis: with ~30 overlapping lines the tooltip alone doesn't
+        // say *which* line it belongs to, so the hovered trace is thickened and
+        // everything else fades back until the pointer leaves. This touches the
+        // rendered SVG directly rather than going through Plotly.restyle — a
+        // restyle mid-hover forces a redraw, which fires plotly_unhover and
+        // undoes the emphasis on the same frame.
+        let baseStyle = null;
+        const traceNodes = () => Array.from(el.querySelectorAll('.scatterlayer > g.trace'));
+
+        const emphasize = idx => {
+            const nodes = traceNodes();
+            if (!nodes.length) return;
+            if (!baseStyle || baseStyle.length !== nodes.length) {
+                baseStyle = nodes.map(n => ({
+                    opacity: n.style.opacity || '',
+                    widths: Array.from(n.querySelectorAll('path.js-line'))
+                        .map(pathEl => pathEl.style.strokeWidth || ''),
+                }));
+            }
+            nodes.forEach((n, i) => {
+                const on = idx === null || i === idx;
+                n.style.opacity = idx === null ? baseStyle[i].opacity : (on ? '1' : '0.12');
+                Array.from(n.querySelectorAll('path.js-line')).forEach((pathEl, k) => {
+                    pathEl.style.strokeWidth = (idx !== null && on)
+                        ? '4.5px' : baseStyle[i].widths[k];
+                });
+            });
+        };
+
+        el.removeAllListeners && el.removeAllListeners('plotly_hover');
+        el.removeAllListeners && el.removeAllListeners('plotly_unhover');
+        el.on('plotly_hover', evt => {
+            const pt = evt.points && evt.points[0];
+            if (pt) emphasize(pt.curveNumber);
+        });
+        el.on('plotly_unhover', () => emphasize(null));
+
+        el.removeAllListeners && el.removeAllListeners('plotly_click');
+        el.on('plotly_click', evt => {
+            const pt = evt.points && evt.points[0];
+            if (!pt) return;
+            const unit = units[pt.curveNumber - unitOffset];
+            const deal = unit ? unit.sales[pt.pointIndex] : singles[pt.pointIndex];
+            if (deal && deal.url) window.open(deal.url, '_blank', 'noopener');
+        });
+
+        renderRepeatTable(units, tableBody);
+        renderRepeatCoverage(units, singles);
+    }
+
+    /* ── How much of the BRF the lines actually cover ── */
+    // Denominator is the 604 apartments in the association. A sale can only be
+    // tied to a specific apartment when Booli exposes an apartment number or a
+    // property page; sales with neither are counted separately, since two such
+    // sales of the *same* apartment are indistinguishable from two different
+    // apartments and must not be added to the apartment tally.
+    function renderRepeatCoverage(units, singles) {
+        const el = document.getElementById('repeat-coverage');
+        if (!el) return;
+        const identifiedSingles = singles.filter(d => d.apartment_number || d.property_id).length;
+        const anonSales = singles.length - identifiedSingles;
+        const pctRepeat = 100 * units.length / TOTAL_APARTMENTS;
+        const pctSingle = 100 * identifiedSingles / TOTAL_APARTMENTS;
+        const fmtPct = v => v.toFixed(1).replace('.', ',');
+        el.innerHTML = `
+            <div class="coverage-bar" role="img"
+                 aria-label="${units.length} av ${TOTAL_APARTMENTS} lägenheter har sålts mer än en gång i urvalet">
+                <span class="coverage-seg repeat" style="width:${pctRepeat.toFixed(2)}%"></span>
+                <span class="coverage-seg single" style="width:${pctSingle.toFixed(2)}%"></span>
+            </div>
+            <p class="coverage-text">
+                <span class="coverage-key"><i style="background:#2a78d6"></i>
+                    <b>${units.length} av ${TOTAL_APARTMENTS} lägenheter (${fmtPct(pctRepeat)} %)</b> ritas som linje
+                </span>
+                <span class="coverage-key"><i style="background:#9dc0ea"></i>
+                    ${identifiedSingles} lägenheter (${fmtPct(pctSingle)} %) med en enda affär
+                </span>
+                <span class="coverage-key"><i style="background:#e2e8f0"></i>
+                    ${TOTAL_APARTMENTS - units.length - identifiedSingles} utan känd affär
+                </span>
+                <br>
+                Ytterligare ${anonSales} affärer saknar lägenhetsnummer hos Booli och går inte att
+                knyta till en bestämd lägenhet – bland dem kan det gömma sig fler upprepade
+                försäljningar, så andelen ovan är en undre gräns.
+            </p>`;
+    }
+
+    /* ── Table view of the same units (accessibility + detail) ── */
+    function renderRepeatTable(units, body) {
+        if (!body) return;
+        const pct = v => (v === null || !Number.isFinite(v)) ? '—'
+            : `${v >= 0 ? '+' : '−'}${Math.abs(v).toFixed(1)} %`;
+        const rows = units.map(u => {
+            const cls = u.up ? 'up' : 'down';
+            return `<tr>
+                <td>${u.label}</td>
+                <td>${Math.round(u.area)} m²</td>
+                <td>${u.sales.length}</td>
+                <td>${u.firstDate} → ${u.lastDate}</td>
+                <td>${fmtNum(u.first)} → ${fmtNum(u.last)}</td>
+                <td class="${cls}">${pct(u.totalPct)}</td>
+                <td class="${cls}">${pct(u.annualPct)}</td>
+            </tr>`;
+        }).join('');
+        body.innerHTML = `
+            <p>Samma lägenheter som i grafen, sorterade efter total förändring.
+               kr/m²${krSuffix()} vid första respektive sista affären.</p>
+            <div style="overflow-x:auto;">
+            <table class="repeat-table">
+                <thead><tr>
+                    <th>Lägenhet</th><th>Boyta</th><th>Affärer</th><th>Period</th>
+                    <th>kr/m² först → sist</th><th>Totalt</th><th>Per år</th>
+                </tr></thead>
+                <tbody>${rows}</tbody>
+            </table></div>`;
+    }
+
     /* ── Apply filters and (re)render ────────────────── */
     function applyAndRender() {
         const roomsSel = document.getElementById('rooms-filter').value;
@@ -2255,6 +2674,7 @@
         renderSeasonal(filtered);
         renderMonthPriceChart(filtered);
         renderMonthEffectChart(filtered);
+        renderRepeatSales(filtered);
         renderMedianCharts(filtered);
         renderMedianComparison(filtered);
         renderNormalizedComparison('median-normalized-container', filtered, {
@@ -2326,6 +2746,7 @@
             const baseLabel = document.getElementById('inflation-base-year');
             if (baseLabel) baseLabel.textContent = String(inflationBaseYear);
             allDeals = buildDeals(rows);
+            assignUnitIds(allDeals);
             debtPerM2 = debt;
             feePerM2 = fee;
             bjorkbackenMedians = bb;
@@ -2363,6 +2784,8 @@
             document.getElementById('trendline').addEventListener('change', applyAndRender);
             document.getElementById('inflation-toggle').addEventListener('change', applyAndRender);
             document.getElementById('show-macro').addEventListener('change', applyAndRender);
+            document.getElementById('repeat-index').addEventListener('change', applyAndRender);
+            document.getElementById('repeat-singles').addEventListener('change', applyAndRender);
             slider.addEventListener('input', applyAndRender);
 
             const urlInput = document.getElementById('url-input');
