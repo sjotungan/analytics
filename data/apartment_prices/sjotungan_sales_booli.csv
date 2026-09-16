@@ -1,4 +1,8 @@
 ﻿sold_date,address,street_number,rooms,living_area_m2,final_price_kr,asking_price_kr,kr_per_m2,monthly_fee_kr,price_change_pct,broker_agency,listing_id,booli_url,apartment_number
+2026-09-14,Myggdalsvägen 10,10,2,49.5,1860000,,37576,,,Svenska Mäklarhuset,6253418,https://www.booli.se/bostad/677747,Lgh 1302
+2026-09-10,Myggdalsvägen 70,70,4,94.0,2100000,,22340,,,Svenska Mäklarhuset,6178855,https://www.booli.se/bostad/677668,Lgh 1201
+2026-09-07,Myggdalsvägen 112,112,4,94.0,1900000,,20213,,,Erik Olsson,6224429,https://www.booli.se/bostad/677518,Lgh 1102
+2026-08-23,Myggdalsvägen 20,20,4,90.0,1995000,,22167,,,Erik Olsson,6192964,https://www.booli.se/bostad/677811,Lgh 1001
 2026-08-18,Myggdalsvägen 30,30,4,88.5,2225000,,25141,,,HusmanHagberg,5875646,https://www.booli.se/bostad/677587,Lgh 1302
 2026-08-14,Myggdalsvägen 90,90,4,92.0,2495000,,27120,,,Svensk Fastighetsförmedling,6139953,https://www.booli.se/annons/6139953,
 2026-07-15,Myggdalsvägen 92,92,4,92.0,2400000,,26087,,,Erik Olsson,6015925,https://www.booli.se/bostad/677989,Lgh 1602
@@ -48,7 +52,7 @@
 2025-01-07,Myggdalsvägen 24,24,3,85.5,2000000,,23392,,,Svensk Fastighetsförmedling,5556146,https://www.booli.se/annons/5556146,
 2024-12-21,Myggdalsvägen 46,46,3,92.0,2500000,,27174,,,HusmanHagberg,5466080,https://www.booli.se/bostad/678077,Lgh 1602
 2024-11-19,Myggdalsvägen 110,110,5,114.5,3850000,,33624,,,Fastighetsbyrån,5533803,https://www.booli.se/annons/5533803,
-2024-11-15,Myggdalsvägen 94,94,4,88.0,2350000,,26705,,,Länsförsäkringar Fastighetsförmedling,5388666,https://www.booli.se/annons/5388666,
+2024-11-15,Myggdalsvägen 94,94,4,88.0,2350000,,26705,,,LF Fastighetsförmedling,5388666,https://www.booli.se/annons/5388666,
 2024-11-08,Myggdalsvägen 88,88,4,88.0,2350000,,26705,,,Svensk Fastighetsförmedling,5474753,https://www.booli.se/annons/5474753,
 2024-10-09,Myggdalsvägen 38,38,4,94.5,2500000,,26455,,,SkandiaMäklarna,5335836,https://www.booli.se/annons/5335836,
 2024-09-12,Myggdalsvägen 96,96,4,90.0,2800000,,31111,,,Svenska Mäklarhuset,5430913,https://www.booli.se/bostad/678012,Lgh 1401
@@ -107,7 +111,7 @@
 2022-06-17,Myggdalsvägen 50,50,3,90.0,3100000,,34444,,,BlumenthalHoffman Fastighetsmäkleri,4676227,https://www.booli.se/annons/4676227,
 2022-05-30,Myggdalsvägen 60,60,4,90.0,4050000,,45000,,,SkandiaMäklarna,4704118,https://www.booli.se/bostad/678110,
 2022-05-25,Myggdalsvägen 60,60,4,90.0,3500000,,38889,,,Bjurfors,4646091,https://www.booli.se/bostad/678118,Lgh 1601
-2022-05-17,Myggdalsvägen 40,40,4,94.0,3000000,,31915,,,Länsförsäkringar Fastighetsförmedling,4511154,https://www.booli.se/bostad/677621,Lgh 1202
+2022-05-17,Myggdalsvägen 40,40,4,94.0,3000000,,31915,,,LF Fastighetsförmedling,4511154,https://www.booli.se/bostad/677621,Lgh 1202
 2022-05-11,Myggdalsvägen 20,20,4,90.0,3650000,,40556,,,SkandiaMäklarna,4586199,https://www.booli.se/bostad/677823,Lgh 1601
 2022-05-04,Myggdalsvägen 102,102,2,49.5,2200000,,44444,,,Svensk Fastighetsförmedling,4408990,https://www.booli.se/annons/4408990,
 2022-04-22,Myggdalsvägen 26,26,3,88.5,3300000,,37288,,,SkandiaMäklarna,4445946,https://www.booli.se/annons/4445946,
@@ -120,7 +124,7 @@
 2022-03-23,Myggdalsvägen 16,16,4,90.0,3220000,,35778,,,SkandiaMäklarna,4557618,https://www.booli.se/annons/4557618,
 2022-03-06,Myggdalsvägen 108,108,2,74.0,2400000,,32432,,,Svensk Fastighetsförmedling,4525444,https://www.booli.se/annons/4525444,
 2022-02-10,Myggdalsvägen 18,18,2,45.0,1950000,,43333,,,HusmanHagberg,4490618,https://www.booli.se/bostad/677798,Lgh 1002
-2022-02-09,Myggdalsvägen 30,30,3,88.5,3770000,,42599,,,Länsförsäkringar Fastighetsförmedling,4473111,https://www.booli.se/bostad/677582,Lgh 1101
+2022-02-09,Myggdalsvägen 30,30,3,88.5,3770000,,42599,,,LF Fastighetsförmedling,4473111,https://www.booli.se/bostad/677582,Lgh 1101
 2022-01-27,Myggdalsvägen 108,108,2,74.0,2600000,,35135,,,Svensk Fastighetsförmedling,4426524,https://www.booli.se/annons/4426524,
 2022-01-26,Myggdalsvägen 50,50,4,92.0,2765000,,30054,,,Södermäklarna,4494555,https://www.booli.se/bostad/678103,Lgh 1502
 2022-01-20,Myggdalsvägen 116,116,2,77.5,3100000,,40000,,,Svensk Fastighetsförmedling,4340033,https://www.booli.se/bostad/677527,Lgh 1001
@@ -128,11 +132,11 @@
 2022-01-18,Myggdalsvägen 102,102,2,49.5,1925000,,38889,,,Svensk Fastighetsförmedling,4463042,https://www.booli.se/annons/4463042,
 2021-12-01,Myggdalsvägen 104,104,2,49.5,2050000,,41414,,,Svensk Fastighetsförmedling,4417117,https://www.booli.se/annons/4417117,
 2021-11-20,Myggdalsvägen 72,72,3,85.5,2550000,,29825,,,Svensk Fastighetsförmedling,4427801,https://www.booli.se/bostad/677673,Lgh 1002
-2021-10-30,Myggdalsvägen 84,84,3,82.5,2730000,,33091,,,Länsförsäkringar Fastighetsförmedling,4387348,https://www.booli.se/bostad/677715,Lgh 1001
+2021-10-30,Myggdalsvägen 84,84,3,82.5,2730000,,33091,,,LF Fastighetsförmedling,4387348,https://www.booli.se/bostad/677715,Lgh 1001
 2021-10-16,Myggdalsvägen 34,34,4,88.5,2850000,,32203,,,Svensk Fastighetsförmedling,4387597,https://www.booli.se/annons/4387597,
 2021-10-15,Myggdalsvägen 24,24,4,94.0,2870000,,30532,,,Fastighetsbyrån,4390174,https://www.booli.se/annons/4390174,
 2021-10-14,Myggdalsvägen 64,64,4,90.0,3340000,,37111,,,SkandiaMäklarna,4394964,https://www.booli.se/bostad/678146,Lgh 1601
-2021-10-12,Myggdalsvägen 104,104,2,74.0,2400000,,32432,,,Länsförsäkringar Fastighetsförmedling,4382509,https://www.booli.se/bostad/677904,Lgh 1301
+2021-10-12,Myggdalsvägen 104,104,2,74.0,2400000,,32432,,,LF Fastighetsförmedling,4382509,https://www.booli.se/bostad/677904,Lgh 1301
 2021-09-29,Myggdalsvägen 76,76,3,85.5,2700000,,31579,,,SkandiaMäklarna,4378395,https://www.booli.se/bostad/677690,Lgh 1002
 2021-09-02,Myggdalsvägen 10,10,2,49.5,2300000,,46465,,,Svensk Fastighetsförmedling,4320424,https://www.booli.se/annons/4320424,
 2021-08-19,Myggdalsvägen 48,48,3,92.0,2575000,,27989,,,SkandiaMäklarna,4321104,https://www.booli.se/annons/4321104,
@@ -143,7 +147,7 @@
 2021-04-28,Myggdalsvägen 12,12,3,90.0,2800000,,31111,,,Svensk Fastighetsförmedling,4194146,https://www.booli.se/annons/4194146,
 2021-04-27,Myggdalsvägen 68,68,4,88.5,2650000,,29944,,,SkandiaMäklarna,4143168,https://www.booli.se/annons/4143168,
 2021-04-27,Myggdalsvägen 108,108,2,74.0,2330000,,31486,,,SkandiaMäklarna,4193342,https://www.booli.se/annons/4193342,
-2021-04-27,Myggdalsvägen 98,98,4,90.0,3000000,,33333,,,Länsförsäkringar Fastighetsförmedling,4144152,https://www.booli.se/bostad/678028,Lgh 1501
+2021-04-27,Myggdalsvägen 98,98,4,90.0,3000000,,33333,,,LF Fastighetsförmedling,4144152,https://www.booli.se/bostad/678028,Lgh 1501
 2021-04-16,Myggdalsvägen 54,54,3,82.5,2550000,,30909,,,SkandiaMäklarna,4139400,https://www.booli.se/bostad/3955117,Lgh 1001
 2021-04-11,Myggdalsvägen 50,50,4,93.0,2625000,,28226,,,Fastighetsbyrån,4122486,https://www.booli.se/annons/4122486,
 2021-04-09,Myggdalsvägen 90,90,4,90.0,2850000,,31667,,,HusmanHagberg,4084102,https://www.booli.se/annons/4084102,
@@ -163,7 +167,7 @@
 2020-10-29,Myggdalsvägen 92,92,4,90.0,2385000,,26500,,,HusmanHagberg,4000634,https://www.booli.se/annons/4000634,
 2020-10-26,Myggdalsvägen 10,10,2,49.5,1795000,,36263,,,Fastighetsbyrån,3962670,https://www.booli.se/annons/3962670,
 2020-10-13,Myggdalsvägen 72,72,4,94.0,2800000,,29787,,,Bjurfors,3984048,https://www.booli.se/bostad/677679,Lgh 1302
-2020-10-13,Myggdalsvägen 46,46,4,90.0,2875000,,31944,,,Länsförsäkringar Fastighetsförmedling,3995642,https://www.booli.se/bostad/678074,Lgh 1501
+2020-10-13,Myggdalsvägen 46,46,4,90.0,2875000,,31944,,,LF Fastighetsförmedling,3995642,https://www.booli.se/bostad/678074,Lgh 1501
 2020-10-09,Myggdalsvägen 26,26,3,88.5,2575000,,29096,,,HusmanHagberg,3749182,https://www.booli.se/bostad/677571,Lgh 1202
 2020-10-09,Myggdalsvägen,,4,89.5,2850000,,31844,,,HusmanHagberg,3736836,https://www.booli.se/annons/3736836,
 2020-10-09,Myggdalsvägen 22,22,3,82.5,2000000,,24242,,,HusmanHagberg,3841879,https://www.booli.se/bostad/677551,Lgh 1001
@@ -175,7 +179,7 @@
 2020-09-09,Myggdalsvägen 104,104,2,74.0,1950000,,26351,,,Fastighetsbyrån,3924974,https://www.booli.se/annons/3924974,
 2020-09-09,Myggdalsvägen 98,98,4,90.0,2745000,,30500,,,SkandiaMäklarna,3937378,https://www.booli.se/annons/3937378,
 2020-08-14,Myggdalsvägen 16,16,4,92.0,2900000,,31522,,,SkandiaMäklarna,3890110,https://www.booli.se/annons/3890110,
-2020-08-14,Myggdalsvägen 6,6,2,49.5,1800000,,36364,,,Länsförsäkringar Fastighetsförmedling,3907854,https://www.booli.se/annons/3907854,
+2020-08-14,Myggdalsvägen 6,6,2,49.5,1800000,,36364,,,LF Fastighetsförmedling,3907854,https://www.booli.se/annons/3907854,
 2020-08-13,Myggdalsvägen 92,92,4,90.0,2650000,,29444,,,HusmanHagberg,3747367,https://www.booli.se/bostad/677982,Lgh 1301
 2020-07-06,Myggdalsvägen 116,116,2,78.0,3100000,,39744,,,Svensk Fastighetsförmedling,3863855,https://www.booli.se/annons/3863855,
 2020-06-17,Myggdalsvägen 106,106,2,74.0,2095000,,28311,,,SkandiaMäklarna,3856811,https://www.booli.se/annons/3856811,
@@ -184,7 +188,7 @@
 2020-05-29,Myggdalsvägen 98,98,4,90.0,2500000,,27778,,,SkandiaMäklarna,3760332,https://www.booli.se/annons/3760332,
 2020-05-14,Myggdalsvägen 10,10,2,49.5,2000000,,40404,,,SkandiaMäklarna,3583802,https://www.booli.se/bostad/677747,Lgh 1302
 2020-05-06,Myggdalsvägen 104,104,2,74.0,1995000,,26959,,,MOHV,3805195,https://www.booli.se/bostad/677901,Lgh 1201
-2020-04-09,Myggdalsvägen 104,104,2,74.0,2250000,,30405,,,Länsförsäkringar Fastighetsförmedling,3776654,https://www.booli.se/annons/3776654,
+2020-04-09,Myggdalsvägen 104,104,2,74.0,2250000,,30405,,,LF Fastighetsförmedling,3776654,https://www.booli.se/annons/3776654,
 2020-02-17,Myggdalsvägen 6,6,2,49.5,2075000,,41919,,,SkandiaMäklarna,3716172,https://www.booli.se/annons/3716172,
 2020-02-15,Myggdalsvägen 10,10,2,49.5,1935000,,39091,,,HusmanHagberg,3722732,https://www.booli.se/annons/3722732,
 2020-02-13,Myggdalsvägen 64,64,4,90.0,2600000,,28889,,,HusmanHagberg,3722768,https://www.booli.se/bostad/678134,Lgh 1001
@@ -206,7 +210,7 @@
 2019-08-15,Myggdalsvägen 90,90,4,90.0,2200000,,24444,,,SkandiaMäklarna,3534942,https://www.booli.se/annons/3534942,
 2019-07-29,Myggdalsvägen 60,60,1,45.0,1835000,,40778,,,Svenska Mäklarhuset,3525894,https://www.booli.se/bostad/678107,Lgh 1002
 2019-07-08,Myggdalsvägen 108,108,2,49.0,2020000,,41224,,,SkandiaMäklarna,3498537,https://www.booli.se/bostad/677942,Lgh 1402
-2019-06-27,Myggdalsvägen 14,14,3,90.0,2900000,,32222,,,Länsförsäkringar Fastighetsförmedling,3459625,https://www.booli.se/annons/3459625,
+2019-06-27,Myggdalsvägen 14,14,3,90.0,2900000,,32222,,,LF Fastighetsförmedling,3459625,https://www.booli.se/annons/3459625,
 2019-06-27,Myggdalsvägen 114,114,3,82.5,2300000,,27879,,,Bjurfors,3463526,https://www.booli.se/bostad/677521,Lgh 1001
 2019-06-19,Myggdalsvägen 32,32,4,88.5,2650000,,29944,,,Svensk Fastighetsförmedling,3385748,https://www.booli.se/annons/3385748,
 2019-06-05,Myggdalsvägen 26,26,4,88.5,2800000,,31638,,,SkandiaMäklarna,3094603,https://www.booli.se/annons/3094603,
@@ -218,7 +222,7 @@
 2019-05-11,Myggdalsvägen 86,86,3,88.5,2250000,,25424,,,HusmanHagberg,3430155,https://www.booli.se/bostad/677725,Lgh 1101
 2019-05-08,Myggdalsvägen 56,56,4,94.0,2625000,,27926,,,Svensk Fastighetsförmedling,3428738,https://www.booli.se/annons/3428738,
 2019-05-03,Myggdalsvägen 100,100,2,74.0,2500000,,33784,,,Svensk Fastighetsförmedling,3384159,https://www.booli.se/annons/3384159,
-2019-04-17,Myggdalsvägen 84,84,3,82.5,2600000,,31515,,,Länsförsäkringar Fastighetsförmedling,3294664,https://www.booli.se/bostad/677715,Lgh 1001
+2019-04-17,Myggdalsvägen 84,84,3,82.5,2600000,,31515,,,LF Fastighetsförmedling,3294664,https://www.booli.se/bostad/677715,Lgh 1001
 2019-04-09,Myggdalsvägen 110,110,2,49.5,1835000,,37071,,,HusmanHagberg,3365405,https://www.booli.se/bostad/677957,Lgh 1402
 2019-04-09,Myggdalsvägen 12,12,4,92.0,3000000,,32609,,,HusmanHagberg,3333841,https://www.booli.se/bostad/677760,Lgh 1202
 2019-03-28,Myggdalsvägen 14,14,4,90.0,2925000,,32500,,,HusmanHagberg,3328716,https://www.booli.se/bostad/677773,Lgh 1201
@@ -229,7 +233,7 @@
 2019-02-20,Myggdalsvägen 112,112,4,94.5,2150000,,22751,,,Svensk Fastighetsförmedling,3299107,https://www.booli.se/annons/3299107,
 2019-01-04,Myggdalsvägen 8,8,2,49.5,2000000,,40404,,,SkandiaMäklarna,3304242,https://www.booli.se/annons/3304242,
 2018-12-13,Myggdalsvägen 110,110,2,49.5,2005000,,40505,,,SkandiaMäklarna,3254554,https://www.booli.se/annons/3254554,
-2018-12-11,Myggdalsvägen 22,22,4,94.0,2800000,,29787,,,Länsförsäkringar Fastighetsförmedling,3291741,https://www.booli.se/bostad/677558,Lgh 1302
+2018-12-11,Myggdalsvägen 22,22,4,94.0,2800000,,29787,,,LF Fastighetsförmedling,3291741,https://www.booli.se/bostad/677558,Lgh 1302
 2018-11-15,Myggdalsvägen 72,72,4,94.0,2700000,,28723,,,Svensk Fastighetsförmedling,3259173,https://www.booli.se/annons/3259173,
 2018-11-15,Myggdalsvägen 28,28,3,88.5,2700000,,30508,,,Fastighetsbyrån,3274243,https://www.booli.se/annons/3274243,
 2018-11-09,Myggdalsvägen 76,76,4,94.0,2320000,,24681,,,Mäklarhuset,3255227,https://www.booli.se/annons/3255227,
@@ -245,8 +249,8 @@
 2018-05-22,Myggdalsvägen 28,28,4,88.5,2950000,,33333,,,Svensk Fastighetsförmedling,3152154,https://www.booli.se/annons/3152154,
 2018-05-04,Myggdalsvägen 62,62,1.5,45.0,1900000,,42222,,,Fastighetsbyrån,3135042,https://www.booli.se/bostad/678121,Lgh 1002
 2018-04-30,Myggdalsvägen 12,12,3,90.0,2350000,,26111,,,HusmanHagberg,3086938,https://www.booli.se/bostad/677761,Lgh 1301
-2018-04-25,Myggdalsvägen 102,102,2,74.0,2585000,,34932,,,Länsförsäkringar Fastighetsförmedling,3128820,https://www.booli.se/bostad/677893,Lgh 1503
-2018-04-23,Myggdalsvägen 14,14,4,90.0,2700000,,30000,,,Länsförsäkringar Fastighetsförmedling,3119370,https://www.booli.se/bostad/677777,Lgh 1401
+2018-04-25,Myggdalsvägen 102,102,2,74.0,2585000,,34932,,,LF Fastighetsförmedling,3128820,https://www.booli.se/bostad/677893,Lgh 1503
+2018-04-23,Myggdalsvägen 14,14,4,90.0,2700000,,30000,,,LF Fastighetsförmedling,3119370,https://www.booli.se/bostad/677777,Lgh 1401
 2018-04-05,Myggdalsvägen 78,78,3,88.5,2295000,,25932,,,HusmanHagberg,3104392,https://www.booli.se/bostad/677698,Lgh 1102
 2018-03-27,Myggdalsvägen 8,8,2,49.5,2060000,,41616,,,HusmanHagberg,3108941,https://www.booli.se/bostad/677850,Lgh 1302
 2018-03-16,Myggdalsvägen 6,6,2,74.0,2395000,,32365,,,Svensk Fastighetsförmedling,3091148,https://www.booli.se/annons/3091148,
@@ -283,8 +287,8 @@
 2016-08-12,Myggdalsvägen 100,100,2,74.0,2075000,,28041,,,HusmanHagberg,2139158,https://www.booli.se/bostad/677875,Lgh 1601
 2016-07-07,Myggdalsvägen 92,92,4,90.0,2300000,,25556,,,Svensk Fastighetsförmedling,2115287,https://www.booli.se/annons/2115287,
 2016-06-23,Myggdalsvägen 68,68,4,88.5,2325000,,26271,,,HusmanHagberg,2117658,https://www.booli.se/annons/2117658,
-2016-06-20,Myggdalsvägen 104,104,2,49.5,1860000,,37576,,,Länsförsäkringar Fastighetsförmedling,2126838,https://www.booli.se/bostad/677905,Lgh 1302
-2016-06-10,Myggdalsvägen 106,106,2,49.5,1860000,,37576,,,Länsförsäkringar Fastighetsförmedling,2113716,https://www.booli.se/bostad/677930,Lgh 1502
+2016-06-20,Myggdalsvägen 104,104,2,49.5,1860000,,37576,,,LF Fastighetsförmedling,2126838,https://www.booli.se/bostad/677905,Lgh 1302
+2016-06-10,Myggdalsvägen 106,106,2,49.5,1860000,,37576,,,LF Fastighetsförmedling,2113716,https://www.booli.se/bostad/677930,Lgh 1502
 2016-05-13,Myggdalsvägen 74,74,4,94.0,2675000,,28457,,,SkandiaMäklarna,2074298,https://www.booli.se/annons/2074298,
 2016-05-12,Myggdalsvägen 104,104,2,49.5,1770000,,35758,,,HusmanHagberg,2087020,https://www.booli.se/bostad/677911,Lgh 1502
 2016-04-29,Myggdalsvägen 16,16,4,92.0,2575000,,27989,,,SkandiaMäklarna,2077024,https://www.booli.se/bostad/677788,Lgh 1202
@@ -338,9 +342,9 @@
 2014-09-04,Myggdalsvägen 10,10,3,87.0,1900000,,21839,,,HusmanHagberg,1721451,https://www.booli.se/annons/1721451,
 2014-09-04,Myggdalsvägen 110,110,2,49.5,1450000,,29293,,,HusmanHagberg,1720622,https://www.booli.se/bostad/677954,Lgh 1302
 2014-09-03,Myggdalsvägen,,2,74.0,1670000,,22568,,,HusmanHagberg,1716988,https://www.booli.se/annons/1716988,
-2014-08-25,Myggdalsvägen 102,102,2,74.0,1440000,,19459,,,Länsförsäkringar Fastighetsförmedling,1707996,https://www.booli.se/annons/1707996,
+2014-08-25,Myggdalsvägen 102,102,2,74.0,1440000,,19459,,,LF Fastighetsförmedling,1707996,https://www.booli.se/annons/1707996,
 2014-07-01,Myggdalsvägen 32,32,4,88.5,1770000,,20000,,,Fastighetsbyrån,1686016,https://www.booli.se/annons/1686016,
-2014-06-19,Myggdalsvägen 106,106,2,49.5,1450000,,29293,,,Länsförsäkringar Fastighetsförmedling,1674607,https://www.booli.se/annons/1674607,
+2014-06-19,Myggdalsvägen 106,106,2,49.5,1450000,,29293,,,LF Fastighetsförmedling,1674607,https://www.booli.se/annons/1674607,
 2014-05-17,Myggdalsvägen 48,48,4,92.0,2465000,,26793,,,SkandiaMäklarna,1644876,https://www.booli.se/annons/1644876,
 2014-05-15,Myggdalsvägen 64,64,3,90.0,1910000,,21222,,,Fastighetsbyrån,1637824,https://www.booli.se/annons/1637824,
 2014-05-10,Myggdalsvägen 98,98,3,92.0,2025000,,22011,,,Svensk Fastighetsförmedling,1637794,https://www.booli.se/annons/1637794,
@@ -377,6 +381,6 @@
 2013-02-15,Myggdalsvägen 20,20,4,92.0,1950000,,21196,,,HusmanHagberg,1350868,https://www.booli.se/annons/1350868,
 2013-01-27,Myggdalsvägen 108,108,2,74.0,1575000,,21284,,,Svensk Fastighetsförmedling,1336621,https://www.booli.se/annons/1336621,
 2013-01-25,Myggdalsvägen 116,116,4,88.5,1420000,,16045,,,HusmanHagberg,1334289,https://www.booli.se/annons/1334289,
-2012-12-14,Myggdalsvägen 104,104,2,49.5,1100000,,22222,,,Länsförsäkringar Fastighetsförmedling,1323386,https://www.booli.se/annons/1323386,
+2012-12-14,Myggdalsvägen 104,104,2,49.5,1100000,,22222,,,LF Fastighetsförmedling,1323386,https://www.booli.se/annons/1323386,
 2012-12-10,Myggdalsvägen 98,98,2,45.0,1150000,,25556,,,Svensk Fastighetsförmedling,1320484,https://www.booli.se/annons/1320484,
-2012-11-02,Myggdalsvägen 98,98,3,90.0,1310000,,14556,,,Länsförsäkringar Fastighetsförmedling,1282324,https://www.booli.se/annons/1282324,
+2012-11-02,Myggdalsvägen 98,98,3,90.0,1310000,,14556,,,LF Fastighetsförmedling,1282324,https://www.booli.se/annons/1282324,

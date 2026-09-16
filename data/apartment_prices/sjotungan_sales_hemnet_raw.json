@@ -1,6 +1,153 @@
 [
   {
     "__typename": "SaleCard",
+    "id": "5338446074492952315",
+    "listingId": "21770032",
+    "slug": "lagenhet-4rum-centrala-tyreso-tyreso-kommun-myggdalsvagen-70-5338446074492952315",
+    "streetAddress": "Myggdalsvägen 70",
+    "soldAt": "1789045200.0",
+    "soldAtLabel": "Såld 10 sep. 2026",
+    "askingPrice": "2 295 000 kr",
+    "finalPrice": "2 100 000 kr",
+    "image": {
+      "__typename": "CardImage",
+      "filename": "b1/4f/b14f736600c827077bc7c1b590b1127a.jpg",
+      "lqipBase64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVQImQEnANj/AKGhofXz9YWFhAgJEQBzdXN1d3iUlZV7fHYAm5ub//vxzcjCsbKziQYVhFKhMXIAAAAASUVORK5CYII="
+    },
+    "livingArea": "94 m²",
+    "locationDescription": "Centrala Tyresö, Tyresö kommun",
+    "fee": "7 907 kr/mån",
+    "squareMeterPrice": "22 340 kr/m²",
+    "housingForm": {
+      "__typename": "HousingForm",
+      "symbol": "APARTMENT",
+      "name": "Lägenhet"
+    },
+    "rooms": "4 rum",
+    "landArea": null,
+    "priceChange": "-8 %",
+    "coordinates": {
+      "__typename": "GeometryPoint",
+      "lat": 59.2420044,
+      "long": 18.23583
+    },
+    "brokerAgencyName": "Svenska Mäklarhuset Tyresö",
+    "brokerAgencyThumbnail": "https://bilder.hemnet.se/images/broker_logo_1_2x/90/66/90666b94ebb0f185aa813f391fdb8202.png",
+    "labels": [
+      {
+        "__typename": "Label",
+        "text": "Balkong",
+        "identifier": "BALCONY",
+        "category": "FEATURE"
+      }
+    ],
+    "product": "NONE",
+    "thumbnail({\"format\":\"ITEMGALLERY_CUT\"})": "https://bilder.hemnet.se/images/itemgallery_cut/b1/4f/b14f736600c827077bc7c1b590b1127a.jpg",
+    "mapThumbnail({\"format\":\"ITEMGALLERY_CUT\"})": null,
+    "recordType": "COMMON"
+  },
+  {
+    "__typename": "SaleCard",
+    "id": "584105930160200428",
+    "listingId": "21768931",
+    "slug": "lagenhet-4rum-centrala-tyreso-tyreso-kommun-myggdalsvagen-112-584105930160200428",
+    "streetAddress": "Myggdalsvägen 112",
+    "soldAt": "1788800400.0",
+    "soldAtLabel": "Såld 7 sep. 2026",
+    "askingPrice": "2 195 000 kr",
+    "finalPrice": "1 900 000 kr",
+    "image": {
+      "__typename": "CardImage",
+      "filename": "eb/93/eb93f030b8d448919c158aee2e22381d.jpg",
+      "lqipBase64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVQImQEnANj/AEVEQa2tq5iXlLOyrwBIRUA8NTA6NTKhoJwAq6miDxAAt7Gs//z4Qb4Rr2zuAFkAAAAASUVORK5CYII="
+    },
+    "livingArea": "94 m²",
+    "locationDescription": "Centrala Tyresö, Tyresö kommun",
+    "fee": "7 706 kr/mån",
+    "squareMeterPrice": "20 213 kr/m²",
+    "housingForm": {
+      "__typename": "HousingForm",
+      "symbol": "APARTMENT",
+      "name": "Lägenhet"
+    },
+    "rooms": "4 rum",
+    "landArea": null,
+    "priceChange": "-13 %",
+    "coordinates": {
+      "__typename": "GeometryPoint",
+      "lat": 59.2408752,
+      "long": 18.2354546
+    },
+    "brokerAgencyName": "Erik Olsson Fastighetsförmedling",
+    "brokerAgencyThumbnail": "https://bilder.hemnet.se/images/broker_logo_1_2x/ad/cd/adcd07e428ac8ff10c43939453b94757.png",
+    "labels": [
+      {
+        "__typename": "Label",
+        "text": "Balkong",
+        "identifier": "BALCONY",
+        "category": "FEATURE"
+      }
+    ],
+    "product": "NONE",
+    "thumbnail({\"format\":\"ITEMGALLERY_CUT\"})": "https://bilder.hemnet.se/images/itemgallery_cut/eb/93/eb93f030b8d448919c158aee2e22381d.jpg",
+    "mapThumbnail({\"format\":\"ITEMGALLERY_CUT\"})": null,
+    "recordType": "COMMON"
+  },
+  {
+    "__typename": "SaleCard",
+    "id": "9124552655674932290",
+    "listingId": "21753787",
+    "slug": "lagenhet-4rum-tyreso-tyreso-kommun-myggdalsvagen-20-9124552655674932290",
+    "streetAddress": "Myggdalsvägen 20",
+    "soldAt": "1787475600.0",
+    "soldAtLabel": "Såld 23 aug. 2026",
+    "askingPrice": "1 995 000 kr",
+    "finalPrice": "1 995 000 kr",
+    "image": {
+      "__typename": "CardImage",
+      "filename": "28/9e/289e6109207274058873c40485279654.jpg",
+      "lqipBase64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVQImQEnANj/AO3s7Nrb2/Hu7icABADt7Ox4eHdiXFmnnZsA0dHOfWhYY1E0//vZ2JAW2K8R5bcAAAAASUVORK5CYII="
+    },
+    "livingArea": "90 m²",
+    "locationDescription": "Tyresö, Tyresö kommun",
+    "fee": "7 095 kr/mån",
+    "squareMeterPrice": "22 167 kr/m²",
+    "housingForm": {
+      "__typename": "HousingForm",
+      "symbol": "APARTMENT",
+      "name": "Lägenhet"
+    },
+    "rooms": "4 rum",
+    "landArea": null,
+    "priceChange": "±0 %",
+    "coordinates": {
+      "__typename": "GeometryPoint",
+      "lat": 59.243084,
+      "long": 18.2336044
+    },
+    "brokerAgencyName": "Erik Olsson Fastighetsförmedling",
+    "brokerAgencyThumbnail": "https://bilder.hemnet.se/images/broker_logo_1_2x/ad/cd/adcd07e428ac8ff10c43939453b94757.png",
+    "labels": [
+      {
+        "__typename": "Label",
+        "text": "Balkong",
+        "identifier": "BALCONY",
+        "category": "FEATURE"
+      },
+      {
+        "__typename": "Label",
+        "text": "Hiss",
+        "identifier": "ELEVATOR",
+        "category": "FEATURE"
+      }
+    ],
+    "product": "NONE",
+    "thumbnail({\"format\":\"ITEMGALLERY_CUT\"})": "https://bilder.hemnet.se/images/itemgallery_cut/28/9e/289e6109207274058873c40485279654.jpg",
+    "mapThumbnail({\"format\":\"ITEMGALLERY_CUT\"})": null,
+    "recordType": "COMMON"
+  },
+  {
+    "__typename": "SaleCard",
     "id": "3820261077386584866",
     "listingId": "21698697",
     "slug": "lagenhet-4rum-tyreso-centrum-tyreso-kommun-myggdalsvagen-30-3820261077386584866",
@@ -9727,42 +9874,6 @@
     "product": "ENHANCED",
     "thumbnail({\"format\":\"ITEMGALLERY_CUT\"})": null,
     "mapThumbnail({\"format\":\"ITEMGALLERY_CUT\"})": "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvR8lQbyQytYdggFUVGZekvRFX2fJGGZ0&language=sv&map_id=f2115f301367545e&markers=icon%3Ahttps%3A%2F%2Fwww.hemnet.se%2Fimages%2Flisting_icons%2Fmap_markers%2Fstatic_map_markers%2Fsale%2Fapartment.png%7Cscale%3A1%7C59.242743753828286%2C18.23428735447202&size=690x460&zoom=14&signature=IbP2P-hD7emTsc06bNptyrKG62g",
-    "recordType": "COMMON"
-  },
-  {
-    "__typename": "SaleCard",
-    "id": "949469",
-    "listingId": "14020338",
-    "slug": "lagenhet-4rum-centrala-tyreso-tyreso-kommun-myggdalsvagen-22-949469",
-    "streetAddress": "Myggdalsvägen 22",
-    "soldAt": "1550703600.0",
-    "soldAtLabel": "Såld 21 feb. 2019",
-    "askingPrice": "2 295 000 kr",
-    "finalPrice": "2 580 000 kr",
-    "image": null,
-    "livingArea": "94 m²",
-    "locationDescription": "Centrala Tyresö, Tyresö kommun",
-    "fee": "5 051 kr/mån",
-    "squareMeterPrice": "27 447 kr/m²",
-    "housingForm": {
-      "__typename": "HousingForm",
-      "symbol": "APARTMENT",
-      "name": "Lägenhet"
-    },
-    "rooms": "4 rum",
-    "landArea": null,
-    "priceChange": "+12 %",
-    "coordinates": {
-      "__typename": "GeometryPoint",
-      "lat": 59.24312102700593,
-      "long": 18.23284952072548
-    },
-    "brokerAgencyName": "Notar",
-    "brokerAgencyThumbnail": "https://bilder.hemnet.se/images/broker_logo_1_2x/fc/31/fc3191831a6ecaf61cd246590fc02710.png",
-    "labels": [],
-    "product": "NONE",
-    "thumbnail({\"format\":\"ITEMGALLERY_CUT\"})": null,
-    "mapThumbnail({\"format\":\"ITEMGALLERY_CUT\"})": "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvR8lQbyQytYdggFUVGZekvRFX2fJGGZ0&language=sv&map_id=f2115f301367545e&markers=icon%3Ahttps%3A%2F%2Fwww.hemnet.se%2Fimages%2Flisting_icons%2Fmap_markers%2Fstatic_map_markers%2Fsale%2Fapartment.png%7Cscale%3A1%7C59.24312102700593%2C18.23284952072548&size=690x460&zoom=14&signature=RP5YdAWmHjwDzrqP2qytxKZkhR4",
     "recordType": "COMMON"
   },
   {

@@ -2,6 +2,186 @@
   "data": {
     "sold": [
       {
+        "id": "6253418",
+        "booliId": "6253418",
+        "url": "/bostad/677747",
+        "soldPrice": {
+          "formatted": "1 860 000 kr",
+          "raw": 1860000,
+          "__typename": "FormattedValue"
+        },
+        "soldSqmPrice": {
+          "raw": 37576,
+          "formatted": "37 600 kr/m²",
+          "__typename": "FormattedValue"
+        },
+        "objectType": "Lägenhet",
+        "livingArea": {
+          "formatted": "49,5 m²",
+          "__typename": "FormattedValue"
+        },
+        "rooms": {
+          "formatted": "2 rum",
+          "raw": 2,
+          "__typename": "FormattedValue"
+        },
+        "soldDate": "2026-09-14",
+        "agency": {
+          "id": "28",
+          "name": "Svenska Mäklarhuset",
+          "__typename": "Agency"
+        },
+        "latitude": 59.24342071,
+        "longitude": 18.23215771,
+        "location": {
+          "address": {
+            "streetAddress": "Myggdalsvägen 10",
+            "__typename": "Address"
+          },
+          "__typename": "Location"
+        },
+        "apartmentNumber": {
+          "formatted": "Lgh 1302",
+          "__typename": "FormattedValue"
+        },
+        "__typename": "SoldProperty"
+      },
+      {
+        "id": "6178855",
+        "booliId": "6178855",
+        "url": "/bostad/677668",
+        "soldPrice": {
+          "formatted": "2 100 000 kr",
+          "raw": 2100000,
+          "__typename": "FormattedValue"
+        },
+        "soldSqmPrice": {
+          "raw": 22340,
+          "formatted": "22 300 kr/m²",
+          "__typename": "FormattedValue"
+        },
+        "objectType": "Lägenhet",
+        "livingArea": {
+          "formatted": "94 m²",
+          "__typename": "FormattedValue"
+        },
+        "rooms": {
+          "formatted": "4 rum",
+          "raw": 4,
+          "__typename": "FormattedValue"
+        },
+        "soldDate": "2026-09-10",
+        "agency": {
+          "id": "28",
+          "name": "Svenska Mäklarhuset",
+          "__typename": "Agency"
+        },
+        "latitude": 59.242078,
+        "longitude": 18.235996,
+        "location": {
+          "address": {
+            "streetAddress": "Myggdalsvägen 70",
+            "__typename": "Address"
+          },
+          "__typename": "Location"
+        },
+        "apartmentNumber": {
+          "formatted": "Lgh 1201",
+          "__typename": "FormattedValue"
+        },
+        "__typename": "SoldProperty"
+      },
+      {
+        "id": "6224429",
+        "booliId": "6224429",
+        "url": "/bostad/677518",
+        "soldPrice": {
+          "formatted": "1 900 000 kr",
+          "raw": 1900000,
+          "__typename": "FormattedValue"
+        },
+        "soldSqmPrice": {
+          "raw": 20213,
+          "formatted": "20 200 kr/m²",
+          "__typename": "FormattedValue"
+        },
+        "objectType": "Lägenhet",
+        "livingArea": {
+          "formatted": "94 m²",
+          "__typename": "FormattedValue"
+        },
+        "rooms": {
+          "formatted": "4 rum",
+          "raw": 4,
+          "__typename": "FormattedValue"
+        },
+        "soldDate": "2026-09-07",
+        "agency": {
+          "id": "10",
+          "name": "Erik Olsson",
+          "__typename": "Agency"
+        },
+        "latitude": 59.24088,
+        "longitude": 18.23545,
+        "location": {
+          "address": {
+            "streetAddress": "Myggdalsvägen 112",
+            "__typename": "Address"
+          },
+          "__typename": "Location"
+        },
+        "apartmentNumber": {
+          "formatted": "Lgh 1102",
+          "__typename": "FormattedValue"
+        },
+        "__typename": "SoldProperty"
+      },
+      {
+        "id": "6192964",
+        "booliId": "6192964",
+        "url": "/bostad/677811",
+        "soldPrice": {
+          "formatted": "1 995 000 kr",
+          "raw": 1995000,
+          "__typename": "FormattedValue"
+        },
+        "soldSqmPrice": {
+          "raw": 22167,
+          "formatted": "22 200 kr/m²",
+          "__typename": "FormattedValue"
+        },
+        "objectType": "Lägenhet",
+        "livingArea": {
+          "formatted": "90 m²",
+          "__typename": "FormattedValue"
+        },
+        "rooms": {
+          "formatted": "4 rum",
+          "raw": 4,
+          "__typename": "FormattedValue"
+        },
+        "soldDate": "2026-08-23",
+        "agency": {
+          "id": "10",
+          "name": "Erik Olsson",
+          "__typename": "Agency"
+        },
+        "latitude": 59.24308322,
+        "longitude": 18.23360633,
+        "location": {
+          "address": {
+            "streetAddress": "Myggdalsvägen 20",
+            "__typename": "Address"
+          },
+          "__typename": "Location"
+        },
+        "apartmentNumber": {
+          "formatted": "Lgh 1001",
+          "__typename": "FormattedValue"
+        },
+        "__typename": "SoldProperty"
+      },
+      {
         "id": "5875646",
         "booliId": "5875646",
         "url": "/bostad/677587",
@@ -2166,7 +2346,7 @@
         "soldDate": "2024-11-15",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.24170851,
@@ -4712,7 +4892,7 @@
         "soldDate": "2022-05-17",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.24258896,
@@ -5282,7 +5462,7 @@
         "soldDate": "2022-02-09",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.24266336,
@@ -5630,7 +5810,7 @@
         "soldDate": "2021-10-30",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.24131578,
@@ -5804,7 +5984,7 @@
         "soldDate": "2021-10-12",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.2411091,
@@ -6272,7 +6452,7 @@
         "soldDate": "2021-04-27",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.241512,
@@ -7145,7 +7325,7 @@
         "soldDate": "2020-10-13",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.24275,
@@ -7664,7 +7844,7 @@
         "soldDate": "2020-08-14",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.24317,
@@ -8054,7 +8234,7 @@
         "soldDate": "2020-04-09",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.2411091,
@@ -9005,7 +9185,7 @@
         "soldDate": "2019-06-27",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.24337575,
@@ -9521,7 +9701,7 @@
         "soldDate": "2019-04-17",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.24131578,
@@ -9995,7 +10175,7 @@
         "soldDate": "2018-12-11",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.2431092,
@@ -10685,7 +10865,7 @@
         "soldDate": "2018-04-25",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.24123667,
@@ -10730,7 +10910,7 @@
         "soldDate": "2018-04-23",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.24337575,
@@ -12335,7 +12515,7 @@
         "soldDate": "2016-06-20",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.2411091,
@@ -12380,7 +12560,7 @@
         "soldDate": "2016-06-10",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.2409407,
@@ -14726,7 +14906,7 @@
         "soldDate": "2014-08-25",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.24123667,
@@ -14810,7 +14990,7 @@
         "soldDate": "2014-06-19",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.2409407,
@@ -16380,7 +16560,7 @@
         "soldDate": "2012-12-14",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.2411091,
@@ -16464,7 +16644,7 @@
         "soldDate": "2012-11-02",
         "agency": {
           "id": "20",
-          "name": "Länsförsäkringar Fastighetsförmedling",
+          "name": "LF Fastighetsförmedling",
           "__typename": "Agency"
         },
         "latitude": 59.241512,
