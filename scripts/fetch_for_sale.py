@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import time
 from datetime import datetime, timezone
 
 from curl_cffi import requests
@@ -85,11 +86,17 @@ def fetch_booli() -> list[dict]:
 
 
 def fetch_hemnet() -> list[dict]:
-    r = requests.get(
-        f"https://www.hemnet.se/bostader?location_ids[]={HEMNET_LOCATION_ID}",
-        impersonate="chrome",
-        timeout=30,
-    )
+    # Hemnet intermittently returns 403 to cloud IPs (e.g. GitHub runners),
+    # so retry a few times with a pause.
+    for attempt in range(5):
+        r = requests.get(
+            f"https://www.hemnet.se/bostader?location_ids[]={HEMNET_LOCATION_ID}",
+            impersonate=("chrome", "safari", "firefox", "edge", "chrome")[attempt],
+            timeout=30,
+        )
+        if r.status_code != 403:
+            break
+        time.sleep(30)
     r.raise_for_status()
     m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', r.text, re.S)
     if not m:
@@ -133,10 +140,13 @@ def to_markdown(source: str, rows: list[dict]) -> str:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", help="also write the Markdown to this file")
+    ap.add_argument("--sources", default="booli,hemnet",
+                    help="comma-separated: booli,hemnet (Booli is blocked from GitHub runners)")
     args = ap.parse_args()
 
+    fetchers = {"booli": ("Booli", fetch_booli), "hemnet": ("Hemnet", fetch_hemnet)}
     sections = []
-    for name, fetch in (("Booli", fetch_booli), ("Hemnet", fetch_hemnet)):
+    for name, fetch in (fetchers[s.strip()] for s in args.sources.split(",")):
         try:
             sections.append(to_markdown(name, fetch()))
         except Exception as e:  # keep the other source's output if one fails

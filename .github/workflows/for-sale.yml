@@ -14,6 +14,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install curl_cffi
-      - run: python scripts/fetch_for_sale.py --out for_sale.md
+      # Booli serves a Cloudflare challenge to GitHub runners; Hemnet only (run Booli locally)
+      - run: python scripts/fetch_for_sale.py --sources hemnet --out for_sale.md
       - run: cat for_sale.md >> "$GITHUB_STEP_SUMMARY"
         if: always()
