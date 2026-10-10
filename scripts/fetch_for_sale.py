@@ -40,18 +40,33 @@ query ($areaId: ID!, $page: Int) {
 """
 
 
+def _booli_post(payload: dict) -> dict:
+    # Booli sometimes rejects one browser fingerprint but accepts another,
+    # so try a few before giving up.
+    errors = []
+    for browser in ("chrome", "safari", "firefox", "edge"):
+        r = requests.post(
+            "https://www.booli.se/graphql",
+            json=payload,
+            headers={
+                "api-client": "booli.se",
+                "Origin": "https://www.booli.se",
+                "Referer": "https://www.booli.se/sok/till-salu",
+            },
+            impersonate=browser,
+            timeout=30,
+        )
+        if r.ok:
+            return r.json()
+        snippet = re.sub(r"\s+", " ", r.text)[:200]
+        errors.append(f"{browser}: HTTP {r.status_code} server={r.headers.get('server')} body={snippet!r}")
+    raise RuntimeError("Booli blocked all attempts: " + " | ".join(errors))
+
+
 def fetch_booli() -> list[dict]:
     rows, page, pages = [], 1, 1
     while page <= pages:
-        r = requests.post(
-            "https://www.booli.se/graphql",
-            json={"query": BOOLI_QUERY, "variables": {"areaId": BOOLI_AREA_ID, "page": page}},
-            headers={"api-client": "booli.se"},
-            impersonate="chrome",
-            timeout=30,
-        )
-        r.raise_for_status()
-        body = r.json()
+        body = _booli_post({"query": BOOLI_QUERY, "variables": {"areaId": BOOLI_AREA_ID, "page": page}})
         if body.get("errors"):
             raise RuntimeError(f"Booli GraphQL error: {body['errors']}")
         res = body["data"]["searchForSale"]
