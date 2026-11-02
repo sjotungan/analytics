@@ -165,20 +165,35 @@ def fetch_hemnet() -> list[dict]:
             "published": datetime.fromtimestamp(float(published), timezone.utc).strftime("%Y-%m-%d") if published else "",
             "url": f"https://www.hemnet.se/bostad/{c['slug']}",
             "upcoming": c.get("upcoming", False),
+            # Since late Oct 2026 Hemnet's search also includes listings it
+            # copies from broker websites (no Hemnet ad, often stale
+            # "kommande" placeholders). Kept apart so counts stay comparable.
+            "aggregated": c.get("recordType") == "AGGREGATED",
         })
     if (total or 0) > len(rows):
         print(f"warning: Hemnet reports {total} listings, parsed {len(rows)}")
     return rows
 
 
-def to_markdown(source: str, rows: list[dict]) -> str:
-    lines = [f"## {source}: {len(rows)} listings", "",
-             "| Address | Price | Rooms | Area | Published |", "|---|---|---|---|---|"]
+def _table(rows: list[dict]) -> list[str]:
+    lines = ["| Address | Price | Rooms | Area | Published |", "|---|---|---|---|---|"]
     for x in sorted(rows, key=lambda x: x["published"], reverse=True):
         price = f"{x['price']:,} kr".replace(",", " ") if isinstance(x["price"], int) else (x["price"] or "–")
         if x.get("upcoming"):
             price += " (snart till salu)"
         lines.append(f"| [{x['address']}]({x['url']}) | {price} | {x['rooms'] or '–'} | {x['area'] or '–'} | {x['published']} |")
+    return lines
+
+
+def to_markdown(source: str, rows: list[dict]) -> str:
+    own = [x for x in rows if not x.get("aggregated")]
+    aggregated = [x for x in rows if x.get("aggregated")]
+    heading = f"## {source}: {len(own)} listings"
+    if aggregated:
+        heading += f" (+{len(aggregated)} aggregated)"
+    lines = [heading, "", *_table(own)]
+    if aggregated:
+        lines += ["", f"### Aggregated from broker websites: {len(aggregated)}", "", *_table(aggregated)]
     return "\n".join(lines) + "\n"
 
 
