@@ -4,7 +4,8 @@ List apartments currently for sale on Myggdalsvägen (Brf Sjötungan) from
 Booli and Hemnet, and print them as Markdown.
 
 Booli is queried through its public GraphQL endpoint; Hemnet's search page
-embeds the results in __NEXT_DATA__. Hemnet blocks plain HTTP clients, so
+embeds the results as Next.js RSC flight data (__NEXT_DATA__ before late
+Oct 2026). Hemnet blocks plain HTTP clients, so
 both are fetched with curl_cffi impersonating Chrome.
 
 Usage:
@@ -85,6 +86,59 @@ def fetch_booli() -> list[dict]:
     return rows
 
 
+def _find_typename(obj, typename: str):
+    """Depth-first search for the first dict with the given __typename."""
+    if isinstance(obj, dict):
+        if obj.get("__typename") == typename:
+            return obj
+        children = obj.values()
+    elif isinstance(obj, list):
+        children = obj
+    else:
+        return None
+    for child in children:
+        found = _find_typename(child, typename)
+        if found is not None:
+            return found
+    return None
+
+
+def hemnet_search_results(html: str) -> tuple[list[dict], int | None]:
+    """Return (search-result cards, Hemnet's reported total) from a page.
+
+    Only the actual search result cards are returned; the page also carries
+    "nearby" recommendation cards that are outside Myggdalsvägen.
+    """
+    m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', html, re.S)
+    if m:
+        # Legacy Pages Router (until Oct 2026): normalized Apollo cache.
+        state = json.loads(m.group(1))["props"]["pageProps"]["__APOLLO_STATE__"]
+        search = state["ROOT_QUERY"]["search"]
+        results = next(v for k, v in search.items() if k.startswith("listings(") and v.get("cards") is not None)
+        return [state[ref["__ref"]] for ref in results["cards"]], results.get("total")
+
+    # App Router (late Oct 2026 on): the data streams in RSC flight chunks,
+    # self.__next_f.push([1, "..."]). Lines of the joined stream look like
+    # `<id>:<payload>`; parse the JSON ones. Cards are inline, not __ref'd.
+    # ListingResultsCombined.cards holds the results; the nearby cards live
+    # under its .recommendations and are skipped by reading .cards only.
+    chunks = re.findall(r'self\.__next_f\.push\(\[1,("(?:[^"\\]|\\.)*")\]\)', html)
+    if not chunks:
+        raise RuntimeError("Hemnet: neither __NEXT_DATA__ nor RSC data found (blocked or page changed)")
+    tree = []
+    for line in "".join(json.loads(c) for c in chunks).split("\n"):
+        lm = re.match(r'^[0-9a-zA-Z]+:([\[{].*)$', line)
+        if lm:
+            try:
+                tree.append(json.loads(lm.group(1)))
+            except json.JSONDecodeError:
+                pass
+    results = _find_typename(tree, "ListingResultsCombined")
+    if results is None or results.get("cards") is None:
+        raise RuntimeError("Hemnet: ListingResultsCombined not found in RSC data (page changed)")
+    return results["cards"], results.get("total")
+
+
 def fetch_hemnet() -> list[dict]:
     # Hemnet intermittently returns 403 to cloud IPs (e.g. GitHub runners),
     # so retry a few times with a pause.
@@ -98,19 +152,10 @@ def fetch_hemnet() -> list[dict]:
             break
         time.sleep(30)
     r.raise_for_status()
-    m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', r.text, re.S)
-    if not m:
-        raise RuntimeError("Hemnet: __NEXT_DATA__ not found (blocked or page changed)")
-    state = json.loads(m.group(1))["props"]["pageProps"]["__APOLLO_STATE__"]
-
-    # Only the actual search result cards; the same object also holds
-    # "nearby" recommendation cards that are outside Myggdalsvägen.
-    search = state["ROOT_QUERY"]["search"]
-    results = next(v for k, v in search.items() if k.startswith("listings(") and v.get("cards") is not None)
+    cards, total = hemnet_search_results(r.text)
 
     rows = []
-    for ref in results["cards"]:
-        c = state[ref["__ref"]]
+    for c in cards:
         published = c.get("publishedAt")
         rows.append({
             "address": c["streetAddress"],
@@ -121,8 +166,8 @@ def fetch_hemnet() -> list[dict]:
             "url": f"https://www.hemnet.se/bostad/{c['slug']}",
             "upcoming": c.get("upcoming", False),
         })
-    if results.get("total", len(rows)) > len(rows):
-        print(f"warning: Hemnet reports {results['total']} listings, parsed {len(rows)}")
+    if (total or 0) > len(rows):
+        print(f"warning: Hemnet reports {total} listings, parsed {len(rows)}")
     return rows
 
 
