@@ -1,11 +1,12 @@
 name: For sale on Myggdalsvägen
 
-# Hemnet blocks many GitHub runner IPs (HTTP 403), so a single daily run
-# fails more often than not. Instead, try every 2 hours (each run gets a new
-# runner/IP) until one succeeds; the day's list is saved as an artifact named
-# for-sale-YYYY-MM-DD and later attempts that day are skipped. A blocked
-# attempt does not fail the run; the run fails only when no list has been
-# fetched for more than 26 hours, so you get at most about one email a day.
+# Hemnet blocks many GitHub runner IPs (HTTP 403), and GitHub starts only a
+# few of the scheduled runs. So each run fetches from 4 parallel jobs (each on
+# its own runner/IP) and keeps the first list that got through; runs are
+# scheduled every 2 hours until one succeeds. The day's list is saved as an
+# artifact named for-sale-YYYY-MM-DD and later scheduled runs that day are
+# skipped. A blocked run fails only when no list has been fetched for more
+# than 26 hours, so you get at most about one email a day.
 on:
   schedule:
     - cron: "17 */2 * * *"
@@ -15,11 +16,15 @@ permissions:
   actions: read
   contents: read
 
+env:
+  GH_TOKEN: ${{ github.token }}
+
 jobs:
-  fetch:
+  check:
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ github.token }}
+    outputs:
+      today: ${{ steps.check.outputs.today }}
+      done: ${{ steps.check.outputs.done }}
     steps:
       - name: Skip if today's list is already fetched
         id: check
@@ -32,41 +37,68 @@ jobs:
             echo "done=true" >> "$GITHUB_OUTPUT"
           fi
 
+  fetch:
+    needs: check
+    if: needs.check.outputs.done != 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        attempt: [1, 2, 3, 4]
+    steps:
       - uses: actions/checkout@v4
-        if: steps.check.outputs.done != 'true'
       - uses: actions/setup-python@v5
-        if: steps.check.outputs.done != 'true'
         with:
           python-version: "3.12"
       - run: pip install curl_cffi
-        if: steps.check.outputs.done != 'true'
-
       # Booli serves a Cloudflare challenge to GitHub runners; Hemnet only (run Booli locally)
       - name: Fetch listings
         id: fetch
-        if: steps.check.outputs.done != 'true'
         continue-on-error: true
         run: python scripts/fetch_for_sale.py --sources hemnet --out for_sale.md
-
-      - run: cat for_sale.md >> "$GITHUB_STEP_SUMMARY"
-        if: steps.check.outputs.done != 'true' && hashFiles('for_sale.md') != ''
-
+      - run: echo "attempt ${{ matrix.attempt }}: ${{ steps.fetch.outcome }}"
       - uses: actions/upload-artifact@v4
         if: steps.fetch.outcome == 'success'
         with:
-          name: for-sale-${{ steps.check.outputs.today }}
+          name: attempt-${{ matrix.attempt }}
+          path: for_sale.md
+          retention-days: 1
+
+  publish:
+    needs: [check, fetch]
+    if: always() && needs.check.outputs.done != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: attempt-*
+          path: attempts
+      - name: Pick the first successful attempt
+        id: pick
+        run: |
+          f=$(ls attempts/*/for_sale.md 2>/dev/null | head -1 || true)
+          echo "Successful attempts: $(ls -d attempts/*/ 2>/dev/null | wc -l) of 4"
+          if [ -n "$f" ]; then
+            cp "$f" for_sale.md
+            cat for_sale.md >> "$GITHUB_STEP_SUMMARY"
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/upload-artifact@v4
+        if: steps.pick.outputs.ok == 'true'
+        with:
+          name: for-sale-${{ needs.check.outputs.today }}
           path: for_sale.md
           retention-days: 90
           overwrite: true
-
       - name: Fail only if no list for over 26 hours
-        if: steps.fetch.outcome == 'failure'
+        if: steps.pick.outputs.ok != 'true'
         run: |
           last=$(gh api "repos/${{ github.repository }}/actions/artifacts?per_page=100" \
             -q '[.artifacts[] | select(.name | startswith("for-sale-"))][0].created_at // empty')
-          echo "Blocked this time; last successful fetch: ${last:-never}"
+          echo "All attempts blocked; last successful fetch: ${last:-never}"
           if [ -z "$last" ] || [ $(( $(date +%s) - $(date -d "$last" +%s) )) -gt $((26 * 3600)) ]; then
             echo "::error::No for-sale list fetched in over 26 hours"
             exit 1
           fi
-          echo "::warning::Hemnet blocked this attempt; will retry in ~2 hours"
+          echo "::warning::Hemnet blocked all attempts; will retry in ~2 hours"
